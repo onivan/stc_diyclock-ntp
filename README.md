@@ -19,7 +19,7 @@ Basic functionality is working:
 * display auto-dim
 * relative humidity (%) and temperature (C) display acquired with AM2302
 
-## I removed the following unnecessary for me and because I hit the limit of the SRAM (optimizations are welcomed)
+## I've removed the following functions unnecessary for me and because I've hit the limit of the SRAM (optimizations are needed)
 * **no** date display/set
 * **no** day of week
 * **no** seconds display/reset
