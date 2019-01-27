@@ -37,35 +37,32 @@ Basic functionality is working:
 
 * solder 3 wires from clock board to ESP8266 module:
 
-**ESP8266 connections:**
+| Line	  | Clock	| ESP8266 |
+|---------|-------|---------| 
+|  5V	    |  R13	| 5V	    |
+| RX<->TX	| P3.6	| D4	    |
+| GND     | R17   | GND     |
 
-| Line	| Clock	| ESP8266 |
-|-------|-------|---------| 
-| 5V	| R13	| 5V	  |
-| GND	| R17	| GND	  |
-| TX-RX	| P3.6	| D4	  |
-
+![photo of modifications](https://raw.githubusercontent.com/onivan/stc_diyclock-ntp/master/photos/20190115_134737.jpg)
 
 * solder 3 wires from AM2302 to ESP8266 module:
 
-**AM2302 connections:**
+| Line	| ESP8266 | AM2302   |
+|-------|---------|----------| 
+| 5V	  | 5V      | 1 (Vcc)  |
+| Data	| D3      | 2 (Data) |
+| GND   | GND     | 4 (Gnd)  |
 
-| Line	| ESP8266 |
-|-------|---------| 
-| 5V	| 5V      | 
-| GND	| GND     | 
-| Data	| D3      | 
-
+![photo of modifications](https://raw.githubusercontent.com/onivan/stc_diyclock-ntp/master/photos/20190115_134638.jpg)
 
 Please ignore an extra 1117-3.3 on my photos: I messed up with 3.3V line on my module and had to solder 1117-3.3 to fix it.
-
-![photo of modifications](https://raw.githubusercontent.com/onivan/stc_diyclock-ntp/master/photos/20190115_134737.jpg)
 
 * get and upload to ESP8266
 https://nodemcu-build.com/index.php
 Add these modules to the build: dht, mdns, rtcfifo, rtcmem, rtctime, sntp.
+![esp build](https://raw.githubusercontent.com/onivan/stc_diyclock-ntp/master/photos/NodeMCU-custom-builds.png)
 
-* Using ESPlorer upload init.lua from the *esp folder.
+* Using ESPlorer upload init.lua from the **esp** folder to your ESP8266.
 
 
 
