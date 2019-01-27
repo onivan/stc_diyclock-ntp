@@ -38,6 +38,7 @@ Basic functionality is working:
 * solder 3 wires from clock board to ESP8266 module:
 
 **ESP8266 connections:**
+
 | Line	| Clock	| ESP8266 |
 |-------|-------|---------| 
 | 5V	| R13	| 5V	  |
@@ -48,6 +49,7 @@ Basic functionality is working:
 * solder 3 wires from AM2302 to ESP8266 module:
 
 **AM2302 connections:**
+
 | Line	| ESP8266 |
 |-------|---------| 
 | 5V	| 5V      | 
