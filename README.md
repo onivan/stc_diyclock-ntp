@@ -17,9 +17,11 @@ Firmware replacement for STC15F mcu-based DIY Clock Kit (available from banggood
 Basic functionality is working:
 * time display **24 hour mode only**
 * display auto-dim
-* relative humidity (%) and temperature (C) display acquired with AM2302
+* relative humidity (%) and temperature (C) display acquired with AM2302 (last 5 seconds every minute or by pressing the Upper button)
+* time syncronization from NTP server (updated and saved to RTC DS1302 every 5 seconds)
+* the first dot on display starts fast blinking after 30 seconds since last successfull time update on the clock (NTP error or no WiFi connection)
 
-## I've removed the following functions unnecessary for me and because I've hit the limit of the SRAM (optimizations are needed)
+I've removed the following functions unnecessary for me and because I've hit the limit of the SRAM (optimizations are needed)
 * **no** date display/set
 * **no** day of week
 * **no** seconds display/reset
@@ -62,16 +64,21 @@ https://nodemcu-build.com/index.php
 Add these modules to the build: dht, mdns, rtcfifo, rtcmem, rtctime, sntp.
 ![esp build](https://raw.githubusercontent.com/onivan/stc_diyclock-ntp/master/photos/NodeMCU-custom-builds.png)
 
+* change variable UTCTZ in init.lua according to your Timezone
+* change WiFI setting in init.lua
 * Using ESPlorer upload init.lua from the **esp** folder to your ESP8266.
 
+## Known bugs
+* wierd time display after midnight: 24 instead of 00
+* sometimes some random symbols start to display. A powercycle helps.
+* non-responsive button operation
 
-
-**note this project in development and a work-in-progress**
+**note this project is in development and a work-in-progress**
 *Pull requests are welcome.*
 
 ## TODOs
 * chime ?
-
+* fallback to NTC temprature if no AM2302 data recieved
 
 
 ## hardware
