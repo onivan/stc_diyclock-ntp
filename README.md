@@ -4,6 +4,7 @@
 
 *The following readme text is to be updated to reflect the changes.*
 
+Based on https://github.com/zerog2k/stc_diyclock
 
 Firmware replacement for STC15F mcu-based DIY Clock Kit (available from banggood [see below for link], aliexpress, et al.) Uses [sdcc](http://sdcc.sf.net) to build and [stcgal](https://github.com/grigorig/stcgal) to flash firmware on to STC15W404AS and STC15W408AS series microcontroller.
 
@@ -11,8 +12,6 @@ Firmware replacement for STC15F mcu-based DIY Clock Kit (available from banggood
 
 [link to Banggood product page for SKU 972289](http://www.banggood.com/DIY-4-Digit-LED-Electronic-Clock-Kit-Temperature-Light-Control-Version-p-972289.html?p=WX0407753399201409DA)
 
-
-Based on https://github.com/zerog2k/stc_diyclock
 
 ## features
 Basic functionality is working:
@@ -30,11 +29,40 @@ Basic functionality is working:
 ## Building steps:
 
 * check what is yours STC MC model. The firmware requires MC with >4 kB of flash and hardware UART. Get one (or a dozen) if needed on aliexpress.
+
+* get ESP8266 WEMOS D1 mini wemos.cc (or clone)
+* get AM2302 humidity sensor (optional)
+
 * solder on the board the pin headers for UART. On my board it marked as P3. We need only RX line (P3.6 of a MC). 
 
+* solder 3 wires from clock board to ESP8266 module:
+
+**ESP8266 connections:**
+Line	Clock	ESP8266
+5V	R13	5V
+GND	R17	GND
+TX-RX	P3.6	D4
+
+
+* solder 3 wires from AM2302 to ESP8266 module:
+
+**AM2302 connections:**
+Line	ESP8266
+5V	5V
+GND	GND
+Data	D3
+
+
+Please ignore an extra 1117-3.3 on my photos: I messed up with 3.3V line on my module and had to solder 1117-3.3 to fix it.
+
+![photo of modifications](https://raw.githubusercontent.com/onivan/stc_diyclock-ntp/master/photos/20190115_134737.jpg)
 
 * get and upload to ESP8266
 https://nodemcu-build.com/index.php
+Add these modules to the build: dht, mdns, rtcfifo, rtcmem, rtctime, sntp.
+
+* Using ESPlorer upload init.lua from the *esp folder.
+
 
 
 **note this project in development and a work-in-progress**
@@ -63,38 +91,20 @@ https://nodemcu-build.com/index.php
 * sdcc installed and in the path (recommend sdcc >= 3.5.0)
 * stcgal (or optionally stc-isp). Note you can either do "git clone --recursive ..." when you check this repo out, or do "git submodule update --init --recursive" in order to fetch stcgal.
 
-## usage
-choose platformio or traditional make build
+### make
 
-### platformio support
-_experimental_
+*Please check and write a correct serial port name in the Makefile
 
-* assumes you have platformio installed
-* choose which mcu you are building for by uncommenting one `env_default` in `platformio.ini`
-* adjust `upload_port` as needed in `platformio.ini`
-
-### traditional make
 ```
 make clean
 make
 make flash
 ```
 
-#### make options
-* override default serial port:
-`STCGALPORT=/dev/ttyUSB0 make flash`
+## pre-compiled hex-file
+If you like, you can try pre-compiled binary: main.hex
 
-* add other options:
-`STCGALOPTS="-l 9600 -b 9600" make flash`
-
-* flashing STC15W408AS:
-`STCGALPROT="stc15" make flash`
-
-## pre-compiled binaries
-If you like, you can try pre-compiled binaries here:
-https://github.com/zerog2k/stc_diyclock/releases
-
-## use STC-ISP flash tool
+## On Windows use STC-ISP flash tool
 Instead of stcgal, you could alternatively use the official stc-isp tool, e.g stc-isp-15xx-v6.85I.exe, to flash.
 A windows app, but also works fine for me under mac and linux with wine.
 
