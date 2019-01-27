@@ -1,5 +1,7 @@
 # STC DIY Clock Kit firmware + NTP Time sync on ESP8622
 
+*The following readme text is to be updated to reflect the changes.*
+
 Firmware replacement for STC15F mcu-based DIY Clock Kit (available from banggood [see below for link], aliexpress, et al.) Uses [sdcc](http://sdcc.sf.net) to build and [stcgal](https://github.com/grigorig/stcgal) to flash firmware on to STC15W404AS and STC15W408AS series microcontroller.
 
 ![Image of Banggood SKU972289](http://img.banggood.com/thumb/large/2014/xiemeijuan/03/SKU203096/A3.jpg?p=WX0407753399201409DA)
@@ -11,13 +13,13 @@ Based on https://github.com/zerog2k/stc_diyclock
 
 ## features
 Basic functionality is working:
-* time display 24 hour mode only
-* no date display/set
-* no day of week
-* no seconds display/reset
+* time display **24 hour mode only**
+* **no** date display/set
+* **no** day of week
+* **no** seconds display/reset
 * display auto-dim
 * relative humidity (%) and temperature (C) display aquired with AM2302
-* no alarm
+* **no** alarm
 
 
 **note this project in development and a work-in-progress**
