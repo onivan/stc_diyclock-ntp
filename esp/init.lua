@@ -1,6 +1,6 @@
 pinDHT = 3
-gpio.mode(2, gpio.OUTPUT)
-gpio.write(2, gpio.HIGH)
+-- gpio.mode(2, gpio.OUTPUT)
+-- gpio.write(2, gpio.HIGH)
 
 local status,temp,humi,temp_decimal,humi_decimal
 
