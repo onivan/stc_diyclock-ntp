@@ -1,0 +1,1306 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.5.0 #9253 (Apr  3 2018) (Linux)
+                                      4 ; This file was generated Tue Jan 15 13:10:02 2019
+                                      5 ;--------------------------------------------------------
+                                      6 	.module ds1302
+                                      7 	.optsdcc -mmcs51 --model-small
+                                      8 	
+                                      9 ;--------------------------------------------------------
+                                     10 ; Public variables in this module
+                                     11 ;--------------------------------------------------------
+                                     12 	.globl _readbyte
+                                     13 	.globl _sendbyte
+                                     14 	.globl _CCF0
+                                     15 	.globl _CCF1
+                                     16 	.globl _CCF2
+                                     17 	.globl _CR
+                                     18 	.globl _CF
+                                     19 	.globl _PADC
+                                     20 	.globl _PLVD
+                                     21 	.globl _PPCA
+                                     22 	.globl _EADC
+                                     23 	.globl _ELVD
+                                     24 	.globl _P4_7
+                                     25 	.globl _P4_6
+                                     26 	.globl _P4_5
+                                     27 	.globl _P4_4
+                                     28 	.globl _P4_3
+                                     29 	.globl _P4_2
+                                     30 	.globl _P4_1
+                                     31 	.globl _P4_0
+                                     32 	.globl _CY
+                                     33 	.globl _AC
+                                     34 	.globl _F0
+                                     35 	.globl _RS1
+                                     36 	.globl _RS0
+                                     37 	.globl _OV
+                                     38 	.globl _F1
+                                     39 	.globl _P
+                                     40 	.globl _PS
+                                     41 	.globl _PT1
+                                     42 	.globl _PX1
+                                     43 	.globl _PT0
+                                     44 	.globl _PX0
+                                     45 	.globl _RD
+                                     46 	.globl _WR
+                                     47 	.globl _T1
+                                     48 	.globl _T0
+                                     49 	.globl _INT1
+                                     50 	.globl _INT0
+                                     51 	.globl _TXD
+                                     52 	.globl _RXD
+                                     53 	.globl _P3_7
+                                     54 	.globl _P3_6
+                                     55 	.globl _P3_5
+                                     56 	.globl _P3_4
+                                     57 	.globl _P3_3
+                                     58 	.globl _P3_2
+                                     59 	.globl _P3_1
+                                     60 	.globl _P3_0
+                                     61 	.globl _EA
+                                     62 	.globl _ES
+                                     63 	.globl _ET1
+                                     64 	.globl _EX1
+                                     65 	.globl _ET0
+                                     66 	.globl _EX0
+                                     67 	.globl _P2_7
+                                     68 	.globl _P2_6
+                                     69 	.globl _P2_5
+                                     70 	.globl _P2_4
+                                     71 	.globl _P2_3
+                                     72 	.globl _P2_2
+                                     73 	.globl _P2_1
+                                     74 	.globl _P2_0
+                                     75 	.globl _SM0
+                                     76 	.globl _SM1
+                                     77 	.globl _SM2
+                                     78 	.globl _REN
+                                     79 	.globl _TB8
+                                     80 	.globl _RB8
+                                     81 	.globl _TI
+                                     82 	.globl _RI
+                                     83 	.globl _P1_7
+                                     84 	.globl _P1_6
+                                     85 	.globl _P1_5
+                                     86 	.globl _P1_4
+                                     87 	.globl _P1_3
+                                     88 	.globl _P1_2
+                                     89 	.globl _P1_1
+                                     90 	.globl _P1_0
+                                     91 	.globl _TF1
+                                     92 	.globl _TR1
+                                     93 	.globl _TF0
+                                     94 	.globl _TR0
+                                     95 	.globl _IE1
+                                     96 	.globl _IT1
+                                     97 	.globl _IE0
+                                     98 	.globl _IT0
+                                     99 	.globl _P0_7
+                                    100 	.globl _P0_6
+                                    101 	.globl _P0_5
+                                    102 	.globl _P0_4
+                                    103 	.globl _P0_3
+                                    104 	.globl _P0_2
+                                    105 	.globl _P0_1
+                                    106 	.globl _P0_0
+                                    107 	.globl _PWMFDCR
+                                    108 	.globl _PWMIF
+                                    109 	.globl _PWMCR
+                                    110 	.globl _PWMCFG
+                                    111 	.globl _CMPCR2
+                                    112 	.globl _CMPCR1
+                                    113 	.globl _CCAP2H
+                                    114 	.globl _CCAP1H
+                                    115 	.globl _CCAP0H
+                                    116 	.globl _PCA_PWM2
+                                    117 	.globl _PCA_PWM1
+                                    118 	.globl _PCA_PWM0
+                                    119 	.globl _CCAP2L
+                                    120 	.globl _CCAP1L
+                                    121 	.globl _CCAP0L
+                                    122 	.globl _CCAPM2
+                                    123 	.globl _CCAPM1
+                                    124 	.globl _CCAPM0
+                                    125 	.globl _CH
+                                    126 	.globl _CL
+                                    127 	.globl _CMOD
+                                    128 	.globl _CCON
+                                    129 	.globl _IAP_CONTR
+                                    130 	.globl _IAP_TRIG
+                                    131 	.globl _IAP_CMD
+                                    132 	.globl _IAP_ADDRL
+                                    133 	.globl _IAP_ADDRH
+                                    134 	.globl _IAP_DATA
+                                    135 	.globl _SPDAT
+                                    136 	.globl _SPCTL
+                                    137 	.globl _SPSTAT
+                                    138 	.globl _ADC_RESL
+                                    139 	.globl _ADC_RES
+                                    140 	.globl _ADC_CONTR
+                                    141 	.globl _SADEN
+                                    142 	.globl _SADDR
+                                    143 	.globl _S4BUF
+                                    144 	.globl _S4CON
+                                    145 	.globl _S3BUF
+                                    146 	.globl _S3CON
+                                    147 	.globl _S2BUF
+                                    148 	.globl _S2CON
+                                    149 	.globl _WDT_CONTR
+                                    150 	.globl _WKTCH
+                                    151 	.globl _WKTCL
+                                    152 	.globl _T2L
+                                    153 	.globl _T2H
+                                    154 	.globl _T3L
+                                    155 	.globl _T3H
+                                    156 	.globl _T4L
+                                    157 	.globl _T4H
+                                    158 	.globl _T3T4M
+                                    159 	.globl _T4T3M
+                                    160 	.globl _INT_CLKO
+                                    161 	.globl _IP2
+                                    162 	.globl _IE2
+                                    163 	.globl _P_SW2
+                                    164 	.globl _P1ASF
+                                    165 	.globl _BUS_SPEED
+                                    166 	.globl _CLK_DIV
+                                    167 	.globl _P_SW1
+                                    168 	.globl _AUXR1
+                                    169 	.globl _AUXR
+                                    170 	.globl _P7M1
+                                    171 	.globl _P7M0
+                                    172 	.globl _P6M1
+                                    173 	.globl _P6M0
+                                    174 	.globl _P5M1
+                                    175 	.globl _P5M0
+                                    176 	.globl _P4M1
+                                    177 	.globl _P4M0
+                                    178 	.globl _P3M1
+                                    179 	.globl _P3M0
+                                    180 	.globl _P2M1
+                                    181 	.globl _P2M0
+                                    182 	.globl _P1M1
+                                    183 	.globl _P1M0
+                                    184 	.globl _P0M1
+                                    185 	.globl _P0M0
+                                    186 	.globl _P4
+                                    187 	.globl _B
+                                    188 	.globl _ACC
+                                    189 	.globl _PSW
+                                    190 	.globl _IP
+                                    191 	.globl _P3
+                                    192 	.globl _IE
+                                    193 	.globl _P2
+                                    194 	.globl _SBUF
+                                    195 	.globl _SCON
+                                    196 	.globl _P1
+                                    197 	.globl _TH1
+                                    198 	.globl _TH0
+                                    199 	.globl _TL1
+                                    200 	.globl _TL0
+                                    201 	.globl _TMOD
+                                    202 	.globl _TCON
+                                    203 	.globl _PCON
+                                    204 	.globl _DPH
+                                    205 	.globl _DPL
+                                    206 	.globl _SP
+                                    207 	.globl _P0
+                                    208 	.globl _CONF_SW_MMDD
+                                    209 	.globl _CONF_CHIME_ON
+                                    210 	.globl _CONF_ALARM_ON
+                                    211 	.globl _CONF_C_F
+                                    212 	.globl _H12_12
+                                    213 	.globl _H12_PM
+                                    214 	.globl _H12_TH
+                                    215 	.globl _ds_writebyte_PARM_2
+                                    216 	.globl _cfg_table
+                                    217 	.globl _rtc_table
+                                    218 	.globl _ds_ram_config_init
+                                    219 	.globl _ds_ram_config_write
+                                    220 	.globl _ds_readbyte
+                                    221 	.globl _ds_readburst
+                                    222 	.globl _ds_writebyte
+                                    223 	.globl _ds_init
+                                    224 	.globl _ds_hours_12_24_toggle
+                                    225 	.globl _ds_hours_incr
+                                    226 	.globl _ds_minutes_incr
+                                    227 	.globl _ds_month_incr
+                                    228 	.globl _ds_day_incr
+                                    229 	.globl _ds_alarm_minutes_incr
+                                    230 	.globl _ds_alarm_hours_incr
+                                    231 	.globl _ds_alarm_on_toggle
+                                    232 	.globl _ds_date_mmdd_toggle
+                                    233 	.globl _ds_temperature_offset_incr
+                                    234 	.globl _ds_temperature_cf_toggle
+                                    235 	.globl _ds_weekday_incr
+                                    236 	.globl _ds_sec_zero
+                                    237 	.globl _ds_split2int
+                                    238 	.globl _ds_int2bcd
+                                    239 	.globl _ds_int2bcd_tens
+                                    240 	.globl _ds_int2bcd_ones
+                                    241 ;--------------------------------------------------------
+                                    242 ; special function registers
+                                    243 ;--------------------------------------------------------
+                                    244 	.area RSEG    (ABS,DATA)
+      000000                        245 	.org 0x0000
+                           000080   246 _P0	=	0x0080
+                           000081   247 _SP	=	0x0081
+                           000082   248 _DPL	=	0x0082
+                           000083   249 _DPH	=	0x0083
+                           000087   250 _PCON	=	0x0087
+                           000088   251 _TCON	=	0x0088
+                           000089   252 _TMOD	=	0x0089
+                           00008A   253 _TL0	=	0x008a
+                           00008B   254 _TL1	=	0x008b
+                           00008C   255 _TH0	=	0x008c
+                           00008D   256 _TH1	=	0x008d
+                           000090   257 _P1	=	0x0090
+                           000098   258 _SCON	=	0x0098
+                           000099   259 _SBUF	=	0x0099
+                           0000A0   260 _P2	=	0x00a0
+                           0000A8   261 _IE	=	0x00a8
+                           0000B0   262 _P3	=	0x00b0
+                           0000B8   263 _IP	=	0x00b8
+                           0000D0   264 _PSW	=	0x00d0
+                           0000E0   265 _ACC	=	0x00e0
+                           0000F0   266 _B	=	0x00f0
+                           0000C0   267 _P4	=	0x00c0
+                           000094   268 _P0M0	=	0x0094
+                           000093   269 _P0M1	=	0x0093
+                           000092   270 _P1M0	=	0x0092
+                           000091   271 _P1M1	=	0x0091
+                           000096   272 _P2M0	=	0x0096
+                           000095   273 _P2M1	=	0x0095
+                           0000B2   274 _P3M0	=	0x00b2
+                           0000B1   275 _P3M1	=	0x00b1
+                           0000B4   276 _P4M0	=	0x00b4
+                           0000B3   277 _P4M1	=	0x00b3
+                           0000CA   278 _P5M0	=	0x00ca
+                           0000C9   279 _P5M1	=	0x00c9
+                           0000CC   280 _P6M0	=	0x00cc
+                           0000CB   281 _P6M1	=	0x00cb
+                           0000E2   282 _P7M0	=	0x00e2
+                           0000E1   283 _P7M1	=	0x00e1
+                           00008E   284 _AUXR	=	0x008e
+                           0000A2   285 _AUXR1	=	0x00a2
+                           0000A2   286 _P_SW1	=	0x00a2
+                           000097   287 _CLK_DIV	=	0x0097
+                           0000A1   288 _BUS_SPEED	=	0x00a1
+                           00009D   289 _P1ASF	=	0x009d
+                           0000BA   290 _P_SW2	=	0x00ba
+                           0000AF   291 _IE2	=	0x00af
+                           0000B5   292 _IP2	=	0x00b5
+                           00008F   293 _INT_CLKO	=	0x008f
+                           0000D1   294 _T4T3M	=	0x00d1
+                           0000D1   295 _T3T4M	=	0x00d1
+                           0000D2   296 _T4H	=	0x00d2
+                           0000D3   297 _T4L	=	0x00d3
+                           0000D4   298 _T3H	=	0x00d4
+                           0000D5   299 _T3L	=	0x00d5
+                           0000D6   300 _T2H	=	0x00d6
+                           0000D7   301 _T2L	=	0x00d7
+                           0000AA   302 _WKTCL	=	0x00aa
+                           0000AB   303 _WKTCH	=	0x00ab
+                           0000C1   304 _WDT_CONTR	=	0x00c1
+                           00009A   305 _S2CON	=	0x009a
+                           00009B   306 _S2BUF	=	0x009b
+                           0000AC   307 _S3CON	=	0x00ac
+                           0000AD   308 _S3BUF	=	0x00ad
+                           000084   309 _S4CON	=	0x0084
+                           000085   310 _S4BUF	=	0x0085
+                           0000A9   311 _SADDR	=	0x00a9
+                           0000B9   312 _SADEN	=	0x00b9
+                           0000BC   313 _ADC_CONTR	=	0x00bc
+                           0000BD   314 _ADC_RES	=	0x00bd
+                           0000BE   315 _ADC_RESL	=	0x00be
+                           0000CD   316 _SPSTAT	=	0x00cd
+                           0000CE   317 _SPCTL	=	0x00ce
+                           0000CF   318 _SPDAT	=	0x00cf
+                           0000C2   319 _IAP_DATA	=	0x00c2
+                           0000C3   320 _IAP_ADDRH	=	0x00c3
+                           0000C4   321 _IAP_ADDRL	=	0x00c4
+                           0000C5   322 _IAP_CMD	=	0x00c5
+                           0000C6   323 _IAP_TRIG	=	0x00c6
+                           0000C7   324 _IAP_CONTR	=	0x00c7
+                           0000D8   325 _CCON	=	0x00d8
+                           0000D9   326 _CMOD	=	0x00d9
+                           0000E9   327 _CL	=	0x00e9
+                           0000F9   328 _CH	=	0x00f9
+                           0000DA   329 _CCAPM0	=	0x00da
+                           0000DB   330 _CCAPM1	=	0x00db
+                           0000DC   331 _CCAPM2	=	0x00dc
+                           0000EA   332 _CCAP0L	=	0x00ea
+                           0000EB   333 _CCAP1L	=	0x00eb
+                           0000EC   334 _CCAP2L	=	0x00ec
+                           0000F2   335 _PCA_PWM0	=	0x00f2
+                           0000F3   336 _PCA_PWM1	=	0x00f3
+                           0000F4   337 _PCA_PWM2	=	0x00f4
+                           0000FA   338 _CCAP0H	=	0x00fa
+                           0000FB   339 _CCAP1H	=	0x00fb
+                           0000FC   340 _CCAP2H	=	0x00fc
+                           0000E6   341 _CMPCR1	=	0x00e6
+                           0000E7   342 _CMPCR2	=	0x00e7
+                           0000F1   343 _PWMCFG	=	0x00f1
+                           0000F5   344 _PWMCR	=	0x00f5
+                           0000F6   345 _PWMIF	=	0x00f6
+                           0000F7   346 _PWMFDCR	=	0x00f7
+                                    347 ;--------------------------------------------------------
+                                    348 ; special function bits
+                                    349 ;--------------------------------------------------------
+                                    350 	.area RSEG    (ABS,DATA)
+      000000                        351 	.org 0x0000
+                           000080   352 _P0_0	=	0x0080
+                           000081   353 _P0_1	=	0x0081
+                           000082   354 _P0_2	=	0x0082
+                           000083   355 _P0_3	=	0x0083
+                           000084   356 _P0_4	=	0x0084
+                           000085   357 _P0_5	=	0x0085
+                           000086   358 _P0_6	=	0x0086
+                           000087   359 _P0_7	=	0x0087
+                           000088   360 _IT0	=	0x0088
+                           000089   361 _IE0	=	0x0089
+                           00008A   362 _IT1	=	0x008a
+                           00008B   363 _IE1	=	0x008b
+                           00008C   364 _TR0	=	0x008c
+                           00008D   365 _TF0	=	0x008d
+                           00008E   366 _TR1	=	0x008e
+                           00008F   367 _TF1	=	0x008f
+                           000090   368 _P1_0	=	0x0090
+                           000091   369 _P1_1	=	0x0091
+                           000092   370 _P1_2	=	0x0092
+                           000093   371 _P1_3	=	0x0093
+                           000094   372 _P1_4	=	0x0094
+                           000095   373 _P1_5	=	0x0095
+                           000096   374 _P1_6	=	0x0096
+                           000097   375 _P1_7	=	0x0097
+                           000098   376 _RI	=	0x0098
+                           000099   377 _TI	=	0x0099
+                           00009A   378 _RB8	=	0x009a
+                           00009B   379 _TB8	=	0x009b
+                           00009C   380 _REN	=	0x009c
+                           00009D   381 _SM2	=	0x009d
+                           00009E   382 _SM1	=	0x009e
+                           00009F   383 _SM0	=	0x009f
+                           0000A0   384 _P2_0	=	0x00a0
+                           0000A1   385 _P2_1	=	0x00a1
+                           0000A2   386 _P2_2	=	0x00a2
+                           0000A3   387 _P2_3	=	0x00a3
+                           0000A4   388 _P2_4	=	0x00a4
+                           0000A5   389 _P2_5	=	0x00a5
+                           0000A6   390 _P2_6	=	0x00a6
+                           0000A7   391 _P2_7	=	0x00a7
+                           0000A8   392 _EX0	=	0x00a8
+                           0000A9   393 _ET0	=	0x00a9
+                           0000AA   394 _EX1	=	0x00aa
+                           0000AB   395 _ET1	=	0x00ab
+                           0000AC   396 _ES	=	0x00ac
+                           0000AF   397 _EA	=	0x00af
+                           0000B0   398 _P3_0	=	0x00b0
+                           0000B1   399 _P3_1	=	0x00b1
+                           0000B2   400 _P3_2	=	0x00b2
+                           0000B3   401 _P3_3	=	0x00b3
+                           0000B4   402 _P3_4	=	0x00b4
+                           0000B5   403 _P3_5	=	0x00b5
+                           0000B6   404 _P3_6	=	0x00b6
+                           0000B7   405 _P3_7	=	0x00b7
+                           0000B0   406 _RXD	=	0x00b0
+                           0000B1   407 _TXD	=	0x00b1
+                           0000B2   408 _INT0	=	0x00b2
+                           0000B3   409 _INT1	=	0x00b3
+                           0000B4   410 _T0	=	0x00b4
+                           0000B5   411 _T1	=	0x00b5
+                           0000B6   412 _WR	=	0x00b6
+                           0000B7   413 _RD	=	0x00b7
+                           0000B8   414 _PX0	=	0x00b8
+                           0000B9   415 _PT0	=	0x00b9
+                           0000BA   416 _PX1	=	0x00ba
+                           0000BB   417 _PT1	=	0x00bb
+                           0000BC   418 _PS	=	0x00bc
+                           0000D0   419 _P	=	0x00d0
+                           0000D1   420 _F1	=	0x00d1
+                           0000D2   421 _OV	=	0x00d2
+                           0000D3   422 _RS0	=	0x00d3
+                           0000D4   423 _RS1	=	0x00d4
+                           0000D5   424 _F0	=	0x00d5
+                           0000D6   425 _AC	=	0x00d6
+                           0000D7   426 _CY	=	0x00d7
+                           0000C0   427 _P4_0	=	0x00c0
+                           0000C1   428 _P4_1	=	0x00c1
+                           0000C2   429 _P4_2	=	0x00c2
+                           0000C3   430 _P4_3	=	0x00c3
+                           0000C4   431 _P4_4	=	0x00c4
+                           0000C5   432 _P4_5	=	0x00c5
+                           0000C6   433 _P4_6	=	0x00c6
+                           0000C7   434 _P4_7	=	0x00c7
+                           0000AE   435 _ELVD	=	0x00ae
+                           0000AD   436 _EADC	=	0x00ad
+                           0000BF   437 _PPCA	=	0x00bf
+                           0000BE   438 _PLVD	=	0x00be
+                           0000BD   439 _PADC	=	0x00bd
+                           0000DF   440 _CF	=	0x00df
+                           0000DE   441 _CR	=	0x00de
+                           0000DA   442 _CCF2	=	0x00da
+                           0000D9   443 _CCF1	=	0x00d9
+                           0000D8   444 _CCF0	=	0x00d8
+                                    445 ;--------------------------------------------------------
+                                    446 ; overlayable register banks
+                                    447 ;--------------------------------------------------------
+                                    448 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        449 	.ds 8
+                                    450 ;--------------------------------------------------------
+                                    451 ; internal ram data
+                                    452 ;--------------------------------------------------------
+                                    453 	.area DSEG    (DATA)
+                           000024   454 _rtc_table	=	0x0024
+                           00002C   455 _cfg_table	=	0x002c
+      000000                        456 _ds_writebyte_PARM_2:
+      000000                        457 	.ds 1
+                                    458 ;--------------------------------------------------------
+                                    459 ; overlayable items in internal ram 
+                                    460 ;--------------------------------------------------------
+                                    461 	.area	OSEG    (OVR,DATA)
+                                    462 	.area	OSEG    (OVR,DATA)
+                                    463 	.area	OSEG    (OVR,DATA)
+                                    464 	.area	OSEG    (OVR,DATA)
+                                    465 	.area	OSEG    (OVR,DATA)
+                                    466 ;--------------------------------------------------------
+                                    467 ; indirectly addressable internal ram data
+                                    468 ;--------------------------------------------------------
+                                    469 	.area ISEG    (DATA)
+                                    470 ;--------------------------------------------------------
+                                    471 ; absolute internal ram data
+                                    472 ;--------------------------------------------------------
+                                    473 	.area IABS    (ABS,DATA)
+                                    474 	.area IABS    (ABS,DATA)
+                                    475 ;--------------------------------------------------------
+                                    476 ; bit data
+                                    477 ;--------------------------------------------------------
+                                    478 	.area BSEG    (BIT)
+                           000034   479 _H12_TH	=	0x0034
+                           000035   480 _H12_PM	=	0x0035
+                           000037   481 _H12_12	=	0x0037
+                           000060   482 _CONF_C_F	=	0x0060
+                           000061   483 _CONF_ALARM_ON	=	0x0061
+                           000062   484 _CONF_CHIME_ON	=	0x0062
+                           00006E   485 _CONF_SW_MMDD	=	0x006e
+                                    486 ;--------------------------------------------------------
+                                    487 ; paged external ram data
+                                    488 ;--------------------------------------------------------
+                                    489 	.area PSEG    (PAG,XDATA)
+                                    490 ;--------------------------------------------------------
+                                    491 ; external ram data
+                                    492 ;--------------------------------------------------------
+                                    493 	.area XSEG    (XDATA)
+                                    494 ;--------------------------------------------------------
+                                    495 ; absolute external ram data
+                                    496 ;--------------------------------------------------------
+                                    497 	.area XABS    (ABS,XDATA)
+                                    498 ;--------------------------------------------------------
+                                    499 ; external initialized ram data
+                                    500 ;--------------------------------------------------------
+                                    501 	.area XISEG   (XDATA)
+                                    502 	.area HOME    (CODE)
+                                    503 	.area GSINIT0 (CODE)
+                                    504 	.area GSINIT1 (CODE)
+                                    505 	.area GSINIT2 (CODE)
+                                    506 	.area GSINIT3 (CODE)
+                                    507 	.area GSINIT4 (CODE)
+                                    508 	.area GSINIT5 (CODE)
+                                    509 	.area GSINIT  (CODE)
+                                    510 	.area GSFINAL (CODE)
+                                    511 	.area CSEG    (CODE)
+                                    512 ;--------------------------------------------------------
+                                    513 ; global & static initialisations
+                                    514 ;--------------------------------------------------------
+                                    515 	.area HOME    (CODE)
+                                    516 	.area GSINIT  (CODE)
+                                    517 	.area GSFINAL (CODE)
+                                    518 	.area GSINIT  (CODE)
+                                    519 ;--------------------------------------------------------
+                                    520 ; Home
+                                    521 ;--------------------------------------------------------
+                                    522 	.area HOME    (CODE)
+                                    523 	.area HOME    (CODE)
+                                    524 ;--------------------------------------------------------
+                                    525 ; code
+                                    526 ;--------------------------------------------------------
+                                    527 	.area CSEG    (CODE)
+                                    528 ;------------------------------------------------------------
+                                    529 ;Allocation info for local variables in function 'ds_ram_config_init'
+                                    530 ;------------------------------------------------------------
+                                    531 ;i                         Allocated to registers r6 
+                                    532 ;j                         Allocated to registers r7 
+                                    533 ;------------------------------------------------------------
+                                    534 ;	src/ds1302.c:17: void ds_ram_config_init() {
+                                    535 ;	-----------------------------------------
+                                    536 ;	 function ds_ram_config_init
+                                    537 ;	-----------------------------------------
+      000000                        538 _ds_ram_config_init:
+                           000007   539 	ar7 = 0x07
+                           000006   540 	ar6 = 0x06
+                           000005   541 	ar5 = 0x05
+                           000004   542 	ar4 = 0x04
+                           000003   543 	ar3 = 0x03
+                           000002   544 	ar2 = 0x02
+                           000001   545 	ar1 = 0x01
+                           000000   546 	ar0 = 0x00
+                                    547 ;	src/ds1302.c:20: if ( (ds_readbyte( DS_CMD_RAM >> 1 | 0x00) != MAGIC_LO || ds_readbyte( DS_CMD_RAM >> 1 | 0x01) != MAGIC_HI) ) {
+      000000 75 82 20         [24]  548 	mov	dpl,#0x20
+      000003 12r00r86         [24]  549 	lcall	_ds_readbyte
+      000006 AF 82            [24]  550 	mov	r7,dpl
+      000008 BF A5 0D         [24]  551 	cjne	r7,#0xA5,00101$
+      00000B 75 82 21         [24]  552 	mov	dpl,#0x21
+      00000E 12r00r86         [24]  553 	lcall	_ds_readbyte
+      000011 AF 82            [24]  554 	mov	r7,dpl
+      000013 BF 5A 02         [24]  555 	cjne	r7,#0x5A,00118$
+      000016 80 15            [24]  556 	sjmp	00110$
+      000018                        557 00118$:
+      000018                        558 00101$:
+                                    559 ;	src/ds1302.c:22: ds_writebyte( DS_CMD_RAM >> 1 | 0x00, MAGIC_LO);
+      000018 75*00 A5         [24]  560 	mov	_ds_writebyte_PARM_2,#0xA5
+      00001B 75 82 20         [24]  561 	mov	dpl,#0x20
+      00001E 12r00rC6         [24]  562 	lcall	_ds_writebyte
+                                    563 ;	src/ds1302.c:23: ds_writebyte( DS_CMD_RAM >> 1 | 0x01, MAGIC_HI);
+      000021 75*00 5A         [24]  564 	mov	_ds_writebyte_PARM_2,#0x5A
+      000024 75 82 21         [24]  565 	mov	dpl,#0x21
+      000027 12r00rC6         [24]  566 	lcall	_ds_writebyte
+                                    567 ;	src/ds1302.c:25: ds_ram_config_write();	// OPTIMISE : Will generate a ljmp to ds_ram_config_write
+                                    568 ;	src/ds1302.c:26: return;
+                                    569 ;	src/ds1302.c:34: for (i = 0; i != 4; i++) {
+      00002A 02r00r43         [24]  570 	ljmp	_ds_ram_config_write
+      00002D                        571 00110$:
+      00002D 7F 22            [12]  572 	mov	r7,#0x22
+      00002F 7E 00            [12]  573 	mov	r6,#0x00
+      000031                        574 00105$:
+                                    575 ;	src/ds1302.c:35: cfg_table[i] = ds_readbyte(j);
+      000031 EE               [12]  576 	mov	a,r6
+      000032 24 2C            [12]  577 	add	a,#_cfg_table
+      000034 F9               [12]  578 	mov	r1,a
+      000035 8F 82            [24]  579 	mov	dpl,r7
+      000037 12r00r86         [24]  580 	lcall	_ds_readbyte
+      00003A E5 82            [12]  581 	mov	a,dpl
+      00003C F7               [12]  582 	mov	@r1,a
+                                    583 ;	src/ds1302.c:36: j++;
+      00003D 0F               [12]  584 	inc	r7
+                                    585 ;	src/ds1302.c:34: for (i = 0; i != 4; i++) {
+      00003E 0E               [12]  586 	inc	r6
+      00003F BE 04 EF         [24]  587 	cjne	r6,#0x04,00105$
+      000042 22               [24]  588 	ret
+                                    589 ;------------------------------------------------------------
+                                    590 ;Allocation info for local variables in function 'ds_ram_config_write'
+                                    591 ;------------------------------------------------------------
+                                    592 ;i                         Allocated to registers r6 
+                                    593 ;j                         Allocated to registers r7 
+                                    594 ;------------------------------------------------------------
+                                    595 ;	src/ds1302.c:40: void ds_ram_config_write() {
+                                    596 ;	-----------------------------------------
+                                    597 ;	 function ds_ram_config_write
+                                    598 ;	-----------------------------------------
+      000043                        599 _ds_ram_config_write:
+                                    600 ;	src/ds1302.c:43: for (i=0; i!=4; i++) {
+      000043 7F 22            [12]  601 	mov	r7,#0x22
+      000045 7E 00            [12]  602 	mov	r6,#0x00
+      000047                        603 00102$:
+                                    604 ;	src/ds1302.c:44: ds_writebyte( j, cfg_table[i]);
+      000047 EE               [12]  605 	mov	a,r6
+      000048 24 2C            [12]  606 	add	a,#_cfg_table
+      00004A F9               [12]  607 	mov	r1,a
+      00004B 87*00            [24]  608 	mov	_ds_writebyte_PARM_2,@r1
+      00004D 8F 82            [24]  609 	mov	dpl,r7
+      00004F 12r00rC6         [24]  610 	lcall	_ds_writebyte
+                                    611 ;	src/ds1302.c:45: j++;
+      000052 0F               [12]  612 	inc	r7
+                                    613 ;	src/ds1302.c:43: for (i=0; i!=4; i++) {
+      000053 0E               [12]  614 	inc	r6
+      000054 BE 04 F0         [24]  615 	cjne	r6,#0x04,00102$
+      000057 22               [24]  616 	ret
+                                    617 ;------------------------------------------------------------
+                                    618 ;Allocation info for local variables in function 'sendbyte'
+                                    619 ;------------------------------------------------------------
+                                    620 ;b                         Allocated to registers 
+                                    621 ;------------------------------------------------------------
+                                    622 ;	src/ds1302.c:49: void sendbyte(uint8_t b)
+                                    623 ;	-----------------------------------------
+                                    624 ;	 function sendbyte
+                                    625 ;	-----------------------------------------
+      000058                        626 _sendbyte:
+                                    627 ;	src/ds1302.c:67: __endasm;
+      000058 C0 07            [24]  628 	push ar7
+      00005A E5 82            [12]  629 	mov a,dpl
+      00005C 7F 08            [12]  630 	mov r7,#8
+      00005E                        631 	00001$:
+      00005E 00               [12]  632 	nop
+      00005F 00               [12]  633 	nop
+      000060 13               [12]  634 	rrc a
+      000061 92 91            [24]  635 	mov _P1_1,c
+      000063 D2 92            [12]  636 	setb _P1_2
+      000065 00               [12]  637 	nop
+      000066 00               [12]  638 	nop
+      000067 C2 92            [12]  639 	clr _P1_2
+      000069 DF F3            [24]  640 	djnz r7,00001$
+      00006B D0 07            [24]  641 	pop ar7
+      00006D 22               [24]  642 	ret
+                                    643 ;------------------------------------------------------------
+                                    644 ;Allocation info for local variables in function 'readbyte'
+                                    645 ;------------------------------------------------------------
+                                    646 ;	src/ds1302.c:70: uint8_t readbyte()
+                                    647 ;	-----------------------------------------
+                                    648 ;	 function readbyte
+                                    649 ;	-----------------------------------------
+      00006E                        650 _readbyte:
+                                    651 ;	src/ds1302.c:88: __endasm;
+      00006E C0 07            [24]  652 	push ar7
+      000070 74 00            [12]  653 	mov a,#0
+      000072 7F 08            [12]  654 	mov r7,#8
+      000074                        655 	00002$:
+      000074 00               [12]  656 	nop
+      000075 00               [12]  657 	nop
+      000076 A2 91            [12]  658 	mov c,_P1_1
+      000078 13               [12]  659 	rrc a
+      000079 D2 92            [12]  660 	setb _P1_2
+      00007B 00               [12]  661 	nop
+      00007C 00               [12]  662 	nop
+      00007D C2 92            [12]  663 	clr _P1_2
+      00007F DF F3            [24]  664 	djnz r7,00002$
+      000081 F5 82            [12]  665 	mov dpl,a
+      000083 D0 07            [24]  666 	pop ar7
+      000085 22               [24]  667 	ret
+                                    668 ;------------------------------------------------------------
+                                    669 ;Allocation info for local variables in function 'ds_readbyte'
+                                    670 ;------------------------------------------------------------
+                                    671 ;addr                      Allocated to registers r7 
+                                    672 ;b                         Allocated to registers r7 
+                                    673 ;------------------------------------------------------------
+                                    674 ;	src/ds1302.c:91: uint8_t ds_readbyte(uint8_t addr) {
+                                    675 ;	-----------------------------------------
+                                    676 ;	 function ds_readbyte
+                                    677 ;	-----------------------------------------
+      000086                        678 _ds_readbyte:
+      000086 C0 07            [24]  679 	push	ar7
+                                    680 ;	src/ds1302.c:94: b = DS_CMD | DS_CMD_CLOCK | addr << 1 | DS_CMD_READ;
+      000088 E5 82            [12]  681 	mov	a,dpl
+      00008A 25 82            [12]  682 	add	a,dpl
+      00008C FF               [12]  683 	mov	r7,a
+      00008D 43 07 81         [24]  684 	orl	ar7,#0x81
+                                    685 ;	src/ds1302.c:95: DS_CE = 0;
+      000090 C2 90            [12]  686 	clr	_P1_0
+                                    687 ;	src/ds1302.c:96: DS_SCLK = 0;
+      000092 C2 92            [12]  688 	clr	_P1_2
+                                    689 ;	src/ds1302.c:97: DS_CE = 1;
+      000094 D2 90            [12]  690 	setb	_P1_0
+                                    691 ;	src/ds1302.c:99: sendbyte(b);
+      000096 8F 82            [24]  692 	mov	dpl,r7
+      000098 12r00r58         [24]  693 	lcall	_sendbyte
+                                    694 ;	src/ds1302.c:101: b = readbyte();
+      00009B 12r00r6E         [24]  695 	lcall	_readbyte
+      00009E AF 82            [24]  696 	mov	r7,dpl
+                                    697 ;	src/ds1302.c:102: DS_CE = 0;
+      0000A0 C2 90            [12]  698 	clr	_P1_0
+                                    699 ;	src/ds1302.c:103: return b;
+      0000A2 8F 82            [24]  700 	mov	dpl,r7
+      0000A4 D0 07            [24]  701 	pop	ar7
+      0000A6 22               [24]  702 	ret
+                                    703 ;------------------------------------------------------------
+                                    704 ;Allocation info for local variables in function 'ds_readburst'
+                                    705 ;------------------------------------------------------------
+                                    706 ;j                         Allocated to registers r7 
+                                    707 ;b                         Allocated to registers 
+                                    708 ;------------------------------------------------------------
+                                    709 ;	src/ds1302.c:106: void ds_readburst() {
+                                    710 ;	-----------------------------------------
+                                    711 ;	 function ds_readburst
+                                    712 ;	-----------------------------------------
+      0000A7                        713 _ds_readburst:
+                                    714 ;	src/ds1302.c:110: DS_CE = 0;
+      0000A7 C2 90            [12]  715 	clr	_P1_0
+                                    716 ;	src/ds1302.c:111: DS_SCLK = 0;
+      0000A9 C2 92            [12]  717 	clr	_P1_2
+                                    718 ;	src/ds1302.c:112: DS_CE = 1;
+      0000AB D2 90            [12]  719 	setb	_P1_0
+                                    720 ;	src/ds1302.c:114: sendbyte(b);
+      0000AD 75 82 BF         [24]  721 	mov	dpl,#0xBF
+      0000B0 12r00r58         [24]  722 	lcall	_sendbyte
+                                    723 ;	src/ds1302.c:116: for (j = 0; j != 8; j++) {
+      0000B3 7F 00            [12]  724 	mov	r7,#0x00
+      0000B5                        725 00102$:
+                                    726 ;	src/ds1302.c:117: rtc_table[j] = readbyte();
+      0000B5 EF               [12]  727 	mov	a,r7
+      0000B6 24 24            [12]  728 	add	a,#_rtc_table
+      0000B8 F9               [12]  729 	mov	r1,a
+      0000B9 12r00r6E         [24]  730 	lcall	_readbyte
+      0000BC E5 82            [12]  731 	mov	a,dpl
+      0000BE F7               [12]  732 	mov	@r1,a
+                                    733 ;	src/ds1302.c:116: for (j = 0; j != 8; j++) {
+      0000BF 0F               [12]  734 	inc	r7
+      0000C0 BF 08 F2         [24]  735 	cjne	r7,#0x08,00102$
+                                    736 ;	src/ds1302.c:119: DS_CE = 0;
+      0000C3 C2 90            [12]  737 	clr	_P1_0
+      0000C5 22               [24]  738 	ret
+                                    739 ;------------------------------------------------------------
+                                    740 ;Allocation info for local variables in function 'ds_writebyte'
+                                    741 ;------------------------------------------------------------
+                                    742 ;data                      Allocated with name '_ds_writebyte_PARM_2'
+                                    743 ;addr                      Allocated to registers r7 
+                                    744 ;b                         Allocated to registers 
+                                    745 ;------------------------------------------------------------
+                                    746 ;	src/ds1302.c:122: void ds_writebyte(uint8_t addr, uint8_t data) {
+                                    747 ;	-----------------------------------------
+                                    748 ;	 function ds_writebyte
+                                    749 ;	-----------------------------------------
+      0000C6                        750 _ds_writebyte:
+      0000C6 C0 07            [24]  751 	push	ar7
+                                    752 ;	src/ds1302.c:125: b = DS_CMD | DS_CMD_CLOCK | addr << 1 | DS_CMD_WRITE;
+      0000C8 E5 82            [12]  753 	mov	a,dpl
+      0000CA 25 82            [12]  754 	add	a,dpl
+      0000CC FF               [12]  755 	mov	r7,a
+      0000CD 74 80            [12]  756 	mov	a,#0x80
+      0000CF 4F               [12]  757 	orl	a,r7
+      0000D0 F5 82            [12]  758 	mov	dpl,a
+                                    759 ;	src/ds1302.c:126: DS_CE = 0;
+      0000D2 C2 90            [12]  760 	clr	_P1_0
+                                    761 ;	src/ds1302.c:127: DS_SCLK = 0;
+      0000D4 C2 92            [12]  762 	clr	_P1_2
+                                    763 ;	src/ds1302.c:128: DS_CE = 1;
+      0000D6 D2 90            [12]  764 	setb	_P1_0
+                                    765 ;	src/ds1302.c:130: sendbyte(b);
+      0000D8 12r00r58         [24]  766 	lcall	_sendbyte
+                                    767 ;	src/ds1302.c:132: sendbyte(data);
+      0000DB 85*00 82         [24]  768 	mov	dpl,_ds_writebyte_PARM_2
+      0000DE 12r00r58         [24]  769 	lcall	_sendbyte
+                                    770 ;	src/ds1302.c:134: DS_CE = 0;
+      0000E1 C2 90            [12]  771 	clr	_P1_0
+      0000E3 D0 07            [24]  772 	pop	ar7
+      0000E5 22               [24]  773 	ret
+                                    774 ;------------------------------------------------------------
+                                    775 ;Allocation info for local variables in function 'ds_init'
+                                    776 ;------------------------------------------------------------
+                                    777 ;b                         Allocated to registers r7 
+                                    778 ;------------------------------------------------------------
+                                    779 ;	src/ds1302.c:137: void ds_init() {
+                                    780 ;	-----------------------------------------
+                                    781 ;	 function ds_init
+                                    782 ;	-----------------------------------------
+      0000E6                        783 _ds_init:
+                                    784 ;	src/ds1302.c:138: uint8_t b = ds_readbyte(DS_ADDR_SECONDS);
+      0000E6 75 82 00         [24]  785 	mov	dpl,#0x00
+      0000E9 12r00r86         [24]  786 	lcall	_ds_readbyte
+      0000EC AF 82            [24]  787 	mov	r7,dpl
+                                    788 ;	src/ds1302.c:139: ds_writebyte(DS_ADDR_WP, 0); // clear WP
+      0000EE 75*00 00         [24]  789 	mov	_ds_writebyte_PARM_2,#0x00
+      0000F1 75 82 07         [24]  790 	mov	dpl,#0x07
+      0000F4 12r00rC6         [24]  791 	lcall	_ds_writebyte
+                                    792 ;	src/ds1302.c:140: b &= ~(0b10000000);
+      0000F7 74 7F            [12]  793 	mov	a,#0x7F
+      0000F9 5F               [12]  794 	anl	a,r7
+      0000FA F5*00            [12]  795 	mov	_ds_writebyte_PARM_2,a
+                                    796 ;	src/ds1302.c:141: ds_writebyte(DS_ADDR_SECONDS, b); // clear CH
+      0000FC 75 82 00         [24]  797 	mov	dpl,#0x00
+      0000FF 02r00rC6         [24]  798 	ljmp	_ds_writebyte
+                                    799 ;------------------------------------------------------------
+                                    800 ;Allocation info for local variables in function 'ds_hours_12_24_toggle'
+                                    801 ;------------------------------------------------------------
+                                    802 ;hours                     Allocated to registers r7 
+                                    803 ;b                         Allocated to registers r6 
+                                    804 ;------------------------------------------------------------
+                                    805 ;	src/ds1302.c:154: void ds_hours_12_24_toggle() {
+                                    806 ;	-----------------------------------------
+                                    807 ;	 function ds_hours_12_24_toggle
+                                    808 ;	-----------------------------------------
+      000102                        809 _ds_hours_12_24_toggle:
+                                    810 ;	src/ds1302.c:157: if (H12_12) { // 12h->24h
+      000102 30 37 25         [24]  811 	jnb	_H12_12,00113$
+                                    812 ;	src/ds1302.c:158: hours = ds_split2int(rtc_table[DS_ADDR_HOUR] & DS_MASK_HOUR12); // hours in 12h format (1-11am 12pm 1-11pm 12am)
+      000105 74 1F            [12]  813 	mov	a,#0x1F
+      000107 55 26            [12]  814 	anl	a,(_rtc_table + 0x0002)
+      000109 F5 82            [12]  815 	mov	dpl,a
+      00010B 12r02rA4         [24]  816 	lcall	_ds_split2int
+      00010E AF 82            [24]  817 	mov	r7,dpl
+                                    818 ;	src/ds1302.c:159: if (hours == 12) {
+      000110 BF 0C 07         [24]  819 	cjne	r7,#0x0C,00106$
+                                    820 ;	src/ds1302.c:160: if (!H12_PM) {
+      000113 20 35 0B         [24]  821 	jb	_H12_PM,00107$
+                                    822 ;	src/ds1302.c:161: hours = 0;
+      000116 7F 00            [12]  823 	mov	r7,#0x00
+      000118 80 07            [24]  824 	sjmp	00107$
+      00011A                        825 00106$:
+                                    826 ;	src/ds1302.c:164: if (H12_PM) {
+      00011A 30 35 04         [24]  827 	jnb	_H12_PM,00107$
+                                    828 ;	src/ds1302.c:165: hours += 12;			 // to 24h format
+      00011D 74 0C            [12]  829 	mov	a,#0x0C
+      00011F 2F               [12]  830 	add	a,r7
+      000120 FF               [12]  831 	mov	r7,a
+      000121                        832 00107$:
+                                    833 ;	src/ds1302.c:168: b = ds_int2bcd(hours);			 // clear hour_12_24 bit
+      000121 8F 82            [24]  834 	mov	dpl,r7
+      000123 12r02rB6         [24]  835 	lcall	_ds_int2bcd
+      000126 AE 82            [24]  836 	mov	r6,dpl
+      000128 80 2B            [24]  837 	sjmp	00114$
+      00012A                        838 00113$:
+                                    839 ;	src/ds1302.c:171: hours = ds_split2int(rtc_table[DS_ADDR_HOUR] & DS_MASK_HOUR24); // hours in 24h format (0-23, 0-11=>am , 12-23=>pm)
+      00012A 74 3F            [12]  840 	mov	a,#0x3F
+      00012C 55 26            [12]  841 	anl	a,(_rtc_table + 0x0002)
+      00012E F5 82            [12]  842 	mov	dpl,a
+      000130 12r02rA4         [24]  843 	lcall	_ds_split2int
+      000133 AF 82            [24]  844 	mov	r7,dpl
+                                    845 ;	src/ds1302.c:172: b = DS_MASK_1224_MODE;
+      000135 7E 80            [12]  846 	mov	r6,#0x80
+                                    847 ;	src/ds1302.c:173: if (hours >= 12) { 	// pm
+      000137 BF 0C 00         [24]  848 	cjne	r7,#0x0C,00140$
+      00013A                        849 00140$:
+      00013A 40 06            [24]  850 	jc	00109$
+                                    851 ;	src/ds1302.c:174: hours -= 12;
+      00013C EF               [12]  852 	mov	a,r7
+      00013D 24 F4            [12]  853 	add	a,#0xF4
+      00013F FF               [12]  854 	mov	r7,a
+                                    855 ;	src/ds1302.c:175: b |= DS_MASK_PM;
+      000140 7E A0            [12]  856 	mov	r6,#0xA0
+      000142                        857 00109$:
+                                    858 ;	src/ds1302.c:177: if (hours == 0) {  		//12am
+      000142 EF               [12]  859 	mov	a,r7
+      000143 70 02            [24]  860 	jnz	00111$
+                                    861 ;	src/ds1302.c:178: hours = 12;
+      000145 7F 0C            [12]  862 	mov	r7,#0x0C
+      000147                        863 00111$:
+                                    864 ;	src/ds1302.c:180: b |= ds_int2bcd(hours);
+      000147 8F 82            [24]  865 	mov	dpl,r7
+      000149 C0 06            [24]  866 	push	ar6
+      00014B 12r02rB6         [24]  867 	lcall	_ds_int2bcd
+      00014E AF 82            [24]  868 	mov	r7,dpl
+      000150 D0 06            [24]  869 	pop	ar6
+      000152 EF               [12]  870 	mov	a,r7
+      000153 42 06            [12]  871 	orl	ar6,a
+      000155                        872 00114$:
+                                    873 ;	src/ds1302.c:183: ds_writebyte(DS_ADDR_HOUR, b);
+      000155 8E*00            [24]  874 	mov	_ds_writebyte_PARM_2,r6
+      000157 75 82 02         [24]  875 	mov	dpl,#0x02
+      00015A 02r00rC6         [24]  876 	ljmp	_ds_writebyte
+                                    877 ;------------------------------------------------------------
+                                    878 ;Allocation info for local variables in function 'ds_hours_incr'
+                                    879 ;------------------------------------------------------------
+                                    880 ;hours                     Allocated to registers r7 
+                                    881 ;b                         Allocated to registers r6 
+                                    882 ;------------------------------------------------------------
+                                    883 ;	src/ds1302.c:187: void ds_hours_incr() {
+                                    884 ;	-----------------------------------------
+                                    885 ;	 function ds_hours_incr
+                                    886 ;	-----------------------------------------
+      00015D                        887 _ds_hours_incr:
+                                    888 ;	src/ds1302.c:189: if (!H12_12) {
+      00015D 20 37 1E         [24]  889 	jb	_H12_12,00112$
+                                    890 ;	src/ds1302.c:190: hours = ds_split2int(rtc_table[DS_ADDR_HOUR] & DS_MASK_HOUR24);	//24h format
+      000160 74 3F            [12]  891 	mov	a,#0x3F
+      000162 55 26            [12]  892 	anl	a,(_rtc_table + 0x0002)
+      000164 F5 82            [12]  893 	mov	dpl,a
+      000166 12r02rA4         [24]  894 	lcall	_ds_split2int
+      000169 AF 82            [24]  895 	mov	r7,dpl
+                                    896 ;	src/ds1302.c:191: INCR(hours, 0, 23);
+      00016B BF 17 00         [24]  897 	cjne	r7,#0x17,00132$
+      00016E                        898 00132$:
+      00016E 50 03            [24]  899 	jnc	00102$
+      000170 0F               [12]  900 	inc	r7
+      000171 80 02            [24]  901 	sjmp	00103$
+      000173                        902 00102$:
+      000173 7F 00            [12]  903 	mov	r7,#0x00
+      000175                        904 00103$:
+                                    905 ;	src/ds1302.c:192: b = ds_int2bcd(hours);		// bit 7 = 0
+      000175 8F 82            [24]  906 	mov	dpl,r7
+      000177 12r02rB6         [24]  907 	lcall	_ds_int2bcd
+      00017A AE 82            [24]  908 	mov	r6,dpl
+      00017C 80 2A            [24]  909 	sjmp	00113$
+      00017E                        910 00112$:
+                                    911 ;	src/ds1302.c:194: hours = ds_split2int(rtc_table[DS_ADDR_HOUR] & DS_MASK_HOUR12);	//12h format
+      00017E 74 1F            [12]  912 	mov	a,#0x1F
+      000180 55 26            [12]  913 	anl	a,(_rtc_table + 0x0002)
+      000182 F5 82            [12]  914 	mov	dpl,a
+      000184 12r02rA4         [24]  915 	lcall	_ds_split2int
+      000187 AF 82            [24]  916 	mov	r7,dpl
+                                    917 ;	src/ds1302.c:195: INCR(hours, 1, 12);
+      000189 BF 0C 00         [24]  918 	cjne	r7,#0x0C,00134$
+      00018C                        919 00134$:
+      00018C 50 03            [24]  920 	jnc	00105$
+      00018E 0F               [12]  921 	inc	r7
+      00018F 80 02            [24]  922 	sjmp	00106$
+      000191                        923 00105$:
+      000191 7F 01            [12]  924 	mov	r7,#0x01
+      000193                        925 00106$:
+                                    926 ;	src/ds1302.c:196: if (hours == 12) {
+      000193 BF 0C 02         [24]  927 	cjne	r7,#0x0C,00108$
+                                    928 ;	src/ds1302.c:197: H12_PM = !H12_PM;
+      000196 B2 35            [12]  929 	cpl	_H12_PM
+      000198                        930 00108$:
+                                    931 ;	src/ds1302.c:199: b = ds_int2bcd(hours) | DS_MASK_1224_MODE;
+      000198 8F 82            [24]  932 	mov	dpl,r7
+      00019A 12r02rB6         [24]  933 	lcall	_ds_int2bcd
+      00019D E5 82            [12]  934 	mov	a,dpl
+      00019F 44 80            [12]  935 	orl	a,#0x80
+      0001A1 FE               [12]  936 	mov	r6,a
+                                    937 ;	src/ds1302.c:200: if (H12_PM) {
+      0001A2 30 35 03         [24]  938 	jnb	_H12_PM,00113$
+                                    939 ;	src/ds1302.c:201: b |=  DS_MASK_PM;
+      0001A5 43 06 20         [24]  940 	orl	ar6,#0x20
+      0001A8                        941 00113$:
+                                    942 ;	src/ds1302.c:204: ds_writebyte(DS_ADDR_HOUR, b);
+      0001A8 8E*00            [24]  943 	mov	_ds_writebyte_PARM_2,r6
+      0001AA 75 82 02         [24]  944 	mov	dpl,#0x02
+      0001AD 02r00rC6         [24]  945 	ljmp	_ds_writebyte
+                                    946 ;------------------------------------------------------------
+                                    947 ;Allocation info for local variables in function 'ds_minutes_incr'
+                                    948 ;------------------------------------------------------------
+                                    949 ;minutes                   Allocated to registers r7 
+                                    950 ;------------------------------------------------------------
+                                    951 ;	src/ds1302.c:208: void ds_minutes_incr() {
+                                    952 ;	-----------------------------------------
+                                    953 ;	 function ds_minutes_incr
+                                    954 ;	-----------------------------------------
+      0001B0                        955 _ds_minutes_incr:
+                                    956 ;	src/ds1302.c:209: uint8_t minutes = ds_split2int(rtc_table[DS_ADDR_MINUTES] & DS_MASK_MINUTES);
+      0001B0 74 7F            [12]  957 	mov	a,#0x7F
+      0001B2 55 25            [12]  958 	anl	a,(_rtc_table + 0x0001)
+      0001B4 F5 82            [12]  959 	mov	dpl,a
+      0001B6 12r02rA4         [24]  960 	lcall	_ds_split2int
+      0001B9 AF 82            [24]  961 	mov	r7,dpl
+                                    962 ;	src/ds1302.c:210: INCR(minutes, 0, 59);
+      0001BB BF 3B 00         [24]  963 	cjne	r7,#0x3B,00109$
+      0001BE                        964 00109$:
+      0001BE 50 03            [24]  965 	jnc	00102$
+      0001C0 0F               [12]  966 	inc	r7
+      0001C1 80 02            [24]  967 	sjmp	00103$
+      0001C3                        968 00102$:
+      0001C3 7F 00            [12]  969 	mov	r7,#0x00
+      0001C5                        970 00103$:
+                                    971 ;	src/ds1302.c:211: ds_writebyte(DS_ADDR_MINUTES, ds_int2bcd(minutes));
+      0001C5 8F 82            [24]  972 	mov	dpl,r7
+      0001C7 12r02rB6         [24]  973 	lcall	_ds_int2bcd
+      0001CA 85 82*00         [24]  974 	mov	_ds_writebyte_PARM_2,dpl
+      0001CD 75 82 01         [24]  975 	mov	dpl,#0x01
+      0001D0 02r00rC6         [24]  976 	ljmp	_ds_writebyte
+                                    977 ;------------------------------------------------------------
+                                    978 ;Allocation info for local variables in function 'ds_month_incr'
+                                    979 ;------------------------------------------------------------
+                                    980 ;month                     Allocated to registers r7 
+                                    981 ;------------------------------------------------------------
+                                    982 ;	src/ds1302.c:215: void ds_month_incr() {
+                                    983 ;	-----------------------------------------
+                                    984 ;	 function ds_month_incr
+                                    985 ;	-----------------------------------------
+      0001D3                        986 _ds_month_incr:
+                                    987 ;	src/ds1302.c:216: uint8_t month = ds_split2int(rtc_table[DS_ADDR_MONTH] & DS_MASK_MONTH);
+      0001D3 74 1F            [12]  988 	mov	a,#0x1F
+      0001D5 55 28            [12]  989 	anl	a,(_rtc_table + 0x0004)
+      0001D7 F5 82            [12]  990 	mov	dpl,a
+      0001D9 12r02rA4         [24]  991 	lcall	_ds_split2int
+      0001DC AF 82            [24]  992 	mov	r7,dpl
+                                    993 ;	src/ds1302.c:217: INCR(month, 1, 12);
+      0001DE BF 0C 00         [24]  994 	cjne	r7,#0x0C,00109$
+      0001E1                        995 00109$:
+      0001E1 50 03            [24]  996 	jnc	00102$
+      0001E3 0F               [12]  997 	inc	r7
+      0001E4 80 02            [24]  998 	sjmp	00103$
+      0001E6                        999 00102$:
+      0001E6 7F 01            [12] 1000 	mov	r7,#0x01
+      0001E8                       1001 00103$:
+                                   1002 ;	src/ds1302.c:218: ds_writebyte(DS_ADDR_MONTH, ds_int2bcd(month));
+      0001E8 8F 82            [24] 1003 	mov	dpl,r7
+      0001EA 12r02rB6         [24] 1004 	lcall	_ds_int2bcd
+      0001ED 85 82*00         [24] 1005 	mov	_ds_writebyte_PARM_2,dpl
+      0001F0 75 82 04         [24] 1006 	mov	dpl,#0x04
+      0001F3 02r00rC6         [24] 1007 	ljmp	_ds_writebyte
+                                   1008 ;------------------------------------------------------------
+                                   1009 ;Allocation info for local variables in function 'ds_day_incr'
+                                   1010 ;------------------------------------------------------------
+                                   1011 ;day                       Allocated to registers r7 
+                                   1012 ;------------------------------------------------------------
+                                   1013 ;	src/ds1302.c:222: void ds_day_incr() {
+                                   1014 ;	-----------------------------------------
+                                   1015 ;	 function ds_day_incr
+                                   1016 ;	-----------------------------------------
+      0001F6                       1017 _ds_day_incr:
+                                   1018 ;	src/ds1302.c:223: uint8_t day = ds_split2int(rtc_table[DS_ADDR_DAY] & DS_MASK_DAY);
+      0001F6 74 3F            [12] 1019 	mov	a,#0x3F
+      0001F8 55 27            [12] 1020 	anl	a,(_rtc_table + 0x0003)
+      0001FA F5 82            [12] 1021 	mov	dpl,a
+      0001FC 12r02rA4         [24] 1022 	lcall	_ds_split2int
+      0001FF AF 82            [24] 1023 	mov	r7,dpl
+                                   1024 ;	src/ds1302.c:224: INCR(day, 1, 31);
+      000201 BF 1F 00         [24] 1025 	cjne	r7,#0x1F,00109$
+      000204                       1026 00109$:
+      000204 50 03            [24] 1027 	jnc	00102$
+      000206 0F               [12] 1028 	inc	r7
+      000207 80 02            [24] 1029 	sjmp	00103$
+      000209                       1030 00102$:
+      000209 7F 01            [12] 1031 	mov	r7,#0x01
+      00020B                       1032 00103$:
+                                   1033 ;	src/ds1302.c:225: ds_writebyte(DS_ADDR_DAY, ds_int2bcd(day));
+      00020B 8F 82            [24] 1034 	mov	dpl,r7
+      00020D 12r02rB6         [24] 1035 	lcall	_ds_int2bcd
+      000210 85 82*00         [24] 1036 	mov	_ds_writebyte_PARM_2,dpl
+      000213 75 82 03         [24] 1037 	mov	dpl,#0x03
+      000216 02r00rC6         [24] 1038 	ljmp	_ds_writebyte
+                                   1039 ;------------------------------------------------------------
+                                   1040 ;Allocation info for local variables in function 'ds_alarm_minutes_incr'
+                                   1041 ;------------------------------------------------------------
+                                   1042 ;mm                        Allocated to registers r7 
+                                   1043 ;------------------------------------------------------------
+                                   1044 ;	src/ds1302.c:228: void ds_alarm_minutes_incr() {
+                                   1045 ;	-----------------------------------------
+                                   1046 ;	 function ds_alarm_minutes_incr
+                                   1047 ;	-----------------------------------------
+      000219                       1048 _ds_alarm_minutes_incr:
+                                   1049 ;	src/ds1302.c:229: uint8_t mm = cfg_table[CFG_ALARM_MINUTES_BYTE] & CFG_ALARM_MINUTES_MASK;
+      000219 74 3F            [12] 1050 	mov	a,#0x3F
+      00021B 55 2D            [12] 1051 	anl	a,(_cfg_table + 0x0001)
+      00021D FF               [12] 1052 	mov	r7,a
+                                   1053 ;	src/ds1302.c:230: INCR(mm, 0, 59);
+      00021E BF 3B 00         [24] 1054 	cjne	r7,#0x3B,00109$
+      000221                       1055 00109$:
+      000221 50 03            [24] 1056 	jnc	00102$
+      000223 0F               [12] 1057 	inc	r7
+      000224 80 02            [24] 1058 	sjmp	00103$
+      000226                       1059 00102$:
+      000226 7F 00            [12] 1060 	mov	r7,#0x00
+      000228                       1061 00103$:
+                                   1062 ;	src/ds1302.c:231: cfg_table[CFG_ALARM_MINUTES_BYTE] &= ~CFG_ALARM_MINUTES_MASK;
+      000228 AE 2D            [24] 1063 	mov	r6,(_cfg_table + 0x0001)
+      00022A 74 C0            [12] 1064 	mov	a,#0xC0
+      00022C 5E               [12] 1065 	anl	a,r6
+      00022D F5 2D            [12] 1066 	mov	(_cfg_table + 0x0001),a
+                                   1067 ;	src/ds1302.c:232: cfg_table[CFG_ALARM_MINUTES_BYTE] |= mm;
+      00022F EF               [12] 1068 	mov	a,r7
+      000230 45 2D            [12] 1069 	orl	a,(_cfg_table + 0x0001)
+      000232 F5 2D            [12] 1070 	mov	(_cfg_table + 0x0001),a
+                                   1071 ;	src/ds1302.c:233: ds_ram_config_write();
+      000234 02r00r43         [24] 1072 	ljmp	_ds_ram_config_write
+                                   1073 ;------------------------------------------------------------
+                                   1074 ;Allocation info for local variables in function 'ds_alarm_hours_incr'
+                                   1075 ;------------------------------------------------------------
+                                   1076 ;hh                        Allocated to registers r7 
+                                   1077 ;------------------------------------------------------------
+                                   1078 ;	src/ds1302.c:236: void ds_alarm_hours_incr() {
+                                   1079 ;	-----------------------------------------
+                                   1080 ;	 function ds_alarm_hours_incr
+                                   1081 ;	-----------------------------------------
+      000237                       1082 _ds_alarm_hours_incr:
+                                   1083 ;	src/ds1302.c:237: uint8_t hh = cfg_table[CFG_ALARM_HOURS_BYTE] >> 3;
+      000237 E5 2C            [12] 1084 	mov	a,_cfg_table
+      000239 C4               [12] 1085 	swap	a
+      00023A 23               [12] 1086 	rl	a
+      00023B 54 1F            [12] 1087 	anl	a,#0x1F
+      00023D FF               [12] 1088 	mov	r7,a
+                                   1089 ;	src/ds1302.c:238: INCR(hh, 0, 23);
+      00023E BF 17 00         [24] 1090 	cjne	r7,#0x17,00109$
+      000241                       1091 00109$:
+      000241 50 03            [24] 1092 	jnc	00102$
+      000243 0F               [12] 1093 	inc	r7
+      000244 80 02            [24] 1094 	sjmp	00103$
+      000246                       1095 00102$:
+      000246 7F 00            [12] 1096 	mov	r7,#0x00
+      000248                       1097 00103$:
+                                   1098 ;	src/ds1302.c:239: hh <<= 3;
+      000248 EF               [12] 1099 	mov	a,r7
+      000249 C4               [12] 1100 	swap	a
+      00024A 03               [12] 1101 	rr	a
+      00024B 54 F8            [12] 1102 	anl	a,#0xF8
+      00024D FF               [12] 1103 	mov	r7,a
+                                   1104 ;	src/ds1302.c:240: cfg_table[CFG_ALARM_HOURS_BYTE] &= ~CFG_ALARM_HOURS_MASK;
+      00024E AE 2C            [24] 1105 	mov	r6,_cfg_table
+      000250 74 07            [12] 1106 	mov	a,#0x07
+      000252 5E               [12] 1107 	anl	a,r6
+      000253 F5 2C            [12] 1108 	mov	_cfg_table,a
+                                   1109 ;	src/ds1302.c:241: cfg_table[CFG_ALARM_HOURS_BYTE] |= hh;
+      000255 EF               [12] 1110 	mov	a,r7
+      000256 45 2C            [12] 1111 	orl	a,_cfg_table
+      000258 F5 2C            [12] 1112 	mov	_cfg_table,a
+                                   1113 ;	src/ds1302.c:242: ds_ram_config_write();
+      00025A 02r00r43         [24] 1114 	ljmp	_ds_ram_config_write
+                                   1115 ;------------------------------------------------------------
+                                   1116 ;Allocation info for local variables in function 'ds_alarm_on_toggle'
+                                   1117 ;------------------------------------------------------------
+                                   1118 ;	src/ds1302.c:245: void ds_alarm_on_toggle() {
+                                   1119 ;	-----------------------------------------
+                                   1120 ;	 function ds_alarm_on_toggle
+                                   1121 ;	-----------------------------------------
+      00025D                       1122 _ds_alarm_on_toggle:
+                                   1123 ;	src/ds1302.c:246: CONF_ALARM_ON = !CONF_ALARM_ON;
+      00025D B2 61            [12] 1124 	cpl	_CONF_ALARM_ON
+                                   1125 ;	src/ds1302.c:247: ds_ram_config_write();
+      00025F 02r00r43         [24] 1126 	ljmp	_ds_ram_config_write
+                                   1127 ;------------------------------------------------------------
+                                   1128 ;Allocation info for local variables in function 'ds_date_mmdd_toggle'
+                                   1129 ;------------------------------------------------------------
+                                   1130 ;	src/ds1302.c:250: void ds_date_mmdd_toggle() {
+                                   1131 ;	-----------------------------------------
+                                   1132 ;	 function ds_date_mmdd_toggle
+                                   1133 ;	-----------------------------------------
+      000262                       1134 _ds_date_mmdd_toggle:
+                                   1135 ;	src/ds1302.c:251: CONF_SW_MMDD = !CONF_SW_MMDD;
+      000262 B2 6E            [12] 1136 	cpl	_CONF_SW_MMDD
+                                   1137 ;	src/ds1302.c:252: ds_ram_config_write();
+      000264 02r00r43         [24] 1138 	ljmp	_ds_ram_config_write
+                                   1139 ;------------------------------------------------------------
+                                   1140 ;Allocation info for local variables in function 'ds_temperature_offset_incr'
+                                   1141 ;------------------------------------------------------------
+                                   1142 ;offset                    Allocated to registers r7 
+                                   1143 ;------------------------------------------------------------
+                                   1144 ;	src/ds1302.c:255: void ds_temperature_offset_incr() {
+                                   1145 ;	-----------------------------------------
+                                   1146 ;	 function ds_temperature_offset_incr
+                                   1147 ;	-----------------------------------------
+      000267                       1148 _ds_temperature_offset_incr:
+                                   1149 ;	src/ds1302.c:256: uint8_t offset = cfg_table[CFG_TEMP_BYTE] & CFG_TEMP_MASK;
+      000267 74 07            [12] 1150 	mov	a,#0x07
+      000269 55 2E            [12] 1151 	anl	a,(_cfg_table + 0x0002)
+      00026B FF               [12] 1152 	mov	r7,a
+                                   1153 ;	src/ds1302.c:257: offset++;
+      00026C 0F               [12] 1154 	inc	r7
+                                   1155 ;	src/ds1302.c:258: offset &= CFG_TEMP_MASK;
+      00026D 53 07 07         [24] 1156 	anl	ar7,#0x07
+                                   1157 ;	src/ds1302.c:259: cfg_table[CFG_TEMP_BYTE] = (cfg_table[CFG_TEMP_BYTE] & ~CFG_TEMP_MASK) | offset;
+      000270 AE 2E            [24] 1158 	mov	r6,(_cfg_table + 0x0002)
+      000272 53 06 F8         [24] 1159 	anl	ar6,#0xF8
+      000275 EF               [12] 1160 	mov	a,r7
+      000276 4E               [12] 1161 	orl	a,r6
+      000277 F5 2E            [12] 1162 	mov	(_cfg_table + 0x0002),a
+                                   1163 ;	src/ds1302.c:260: ds_ram_config_write();
+      000279 02r00r43         [24] 1164 	ljmp	_ds_ram_config_write
+                                   1165 ;------------------------------------------------------------
+                                   1166 ;Allocation info for local variables in function 'ds_temperature_cf_toggle'
+                                   1167 ;------------------------------------------------------------
+                                   1168 ;	src/ds1302.c:263: void ds_temperature_cf_toggle() {
+                                   1169 ;	-----------------------------------------
+                                   1170 ;	 function ds_temperature_cf_toggle
+                                   1171 ;	-----------------------------------------
+      00027C                       1172 _ds_temperature_cf_toggle:
+                                   1173 ;	src/ds1302.c:264: CONF_C_F = !CONF_C_F;
+      00027C B2 60            [12] 1174 	cpl	_CONF_C_F
+                                   1175 ;	src/ds1302.c:265: ds_ram_config_write();
+      00027E 02r00r43         [24] 1176 	ljmp	_ds_ram_config_write
+                                   1177 ;------------------------------------------------------------
+                                   1178 ;Allocation info for local variables in function 'ds_weekday_incr'
+                                   1179 ;------------------------------------------------------------
+                                   1180 ;day                       Allocated to registers r7 
+                                   1181 ;------------------------------------------------------------
+                                   1182 ;	src/ds1302.c:268: void ds_weekday_incr() {
+                                   1183 ;	-----------------------------------------
+                                   1184 ;	 function ds_weekday_incr
+                                   1185 ;	-----------------------------------------
+      000281                       1186 _ds_weekday_incr:
+                                   1187 ;	src/ds1302.c:269: uint8_t day = rtc_table[DS_ADDR_WEEKDAY];
+      000281 AF 29            [24] 1188 	mov	r7,(_rtc_table + 0x0005)
+                                   1189 ;	src/ds1302.c:270: INCR(day, 1, 7);
+      000283 BF 07 00         [24] 1190 	cjne	r7,#0x07,00109$
+      000286                       1191 00109$:
+      000286 50 03            [24] 1192 	jnc	00102$
+      000288 0F               [12] 1193 	inc	r7
+      000289 80 02            [24] 1194 	sjmp	00103$
+      00028B                       1195 00102$:
+      00028B 7F 01            [12] 1196 	mov	r7,#0x01
+      00028D                       1197 00103$:
+                                   1198 ;	src/ds1302.c:271: ds_writebyte(DS_ADDR_WEEKDAY, day);
+      00028D 8F*00            [24] 1199 	mov	_ds_writebyte_PARM_2,r7
+      00028F 75 82 05         [24] 1200 	mov	dpl,#0x05
+      000292 12r00rC6         [24] 1201 	lcall	_ds_writebyte
+                                   1202 ;	src/ds1302.c:272: rtc_table[DS_ADDR_WEEKDAY] = day;		// usefull ?
+      000295 8F 29            [24] 1203 	mov	(_rtc_table + 0x0005),r7
+      000297 22               [24] 1204 	ret
+                                   1205 ;------------------------------------------------------------
+                                   1206 ;Allocation info for local variables in function 'ds_sec_zero'
+                                   1207 ;------------------------------------------------------------
+                                   1208 ;	src/ds1302.c:275: void ds_sec_zero() {
+                                   1209 ;	-----------------------------------------
+                                   1210 ;	 function ds_sec_zero
+                                   1211 ;	-----------------------------------------
+      000298                       1212 _ds_sec_zero:
+                                   1213 ;	src/ds1302.c:276: rtc_table[DS_ADDR_SECONDS] = 0;
+      000298 75 24 00         [24] 1214 	mov	_rtc_table,#0x00
+                                   1215 ;	src/ds1302.c:277: ds_writebyte(DS_ADDR_SECONDS, 0);
+      00029B 75*00 00         [24] 1216 	mov	_ds_writebyte_PARM_2,#0x00
+      00029E 75 82 00         [24] 1217 	mov	dpl,#0x00
+      0002A1 02r00rC6         [24] 1218 	ljmp	_ds_writebyte
+                                   1219 ;------------------------------------------------------------
+                                   1220 ;Allocation info for local variables in function 'ds_split2int'
+                                   1221 ;------------------------------------------------------------
+                                   1222 ;tens_ones                 Allocated to registers r7 
+                                   1223 ;------------------------------------------------------------
+                                   1224 ;	src/ds1302.c:280: uint8_t ds_split2int(uint8_t tens_ones) {
+                                   1225 ;	-----------------------------------------
+                                   1226 ;	 function ds_split2int
+                                   1227 ;	-----------------------------------------
+      0002A4                       1228 _ds_split2int:
+                                   1229 ;	src/ds1302.c:281: return (tens_ones >> 4) * 10 + (tens_ones & 0x0F);
+      0002A4 E5 82            [12] 1230 	mov	a,dpl
+      0002A6 FF               [12] 1231 	mov	r7,a
+      0002A7 C4               [12] 1232 	swap	a
+      0002A8 54 0F            [12] 1233 	anl	a,#0x0F
+      0002AA 75 F0 0A         [24] 1234 	mov	b,#0x0A
+      0002AD A4               [48] 1235 	mul	ab
+      0002AE FE               [12] 1236 	mov	r6,a
+      0002AF 74 0F            [12] 1237 	mov	a,#0x0F
+      0002B1 5F               [12] 1238 	anl	a,r7
+      0002B2 2E               [12] 1239 	add	a,r6
+      0002B3 F5 82            [12] 1240 	mov	dpl,a
+      0002B5 22               [24] 1241 	ret
+                                   1242 ;------------------------------------------------------------
+                                   1243 ;Allocation info for local variables in function 'ds_int2bcd'
+                                   1244 ;------------------------------------------------------------
+                                   1245 ;integer                   Allocated to registers r7 
+                                   1246 ;------------------------------------------------------------
+                                   1247 ;	src/ds1302.c:285: uint8_t ds_int2bcd(uint8_t integer) {
+                                   1248 ;	-----------------------------------------
+                                   1249 ;	 function ds_int2bcd
+                                   1250 ;	-----------------------------------------
+      0002B6                       1251 _ds_int2bcd:
+      0002B6 AF 82            [24] 1252 	mov	r7,dpl
+                                   1253 ;	src/ds1302.c:286: return integer / 10 << 4 | integer % 10;
+      0002B8 75 F0 0A         [24] 1254 	mov	b,#0x0A
+      0002BB EF               [12] 1255 	mov	a,r7
+      0002BC 84               [48] 1256 	div	ab
+      0002BD C4               [12] 1257 	swap	a
+      0002BE 54 F0            [12] 1258 	anl	a,#0xF0
+      0002C0 FE               [12] 1259 	mov	r6,a
+      0002C1 75 F0 0A         [24] 1260 	mov	b,#0x0A
+      0002C4 EF               [12] 1261 	mov	a,r7
+      0002C5 84               [48] 1262 	div	ab
+      0002C6 E5 F0            [12] 1263 	mov	a,b
+      0002C8 4E               [12] 1264 	orl	a,r6
+      0002C9 F5 82            [12] 1265 	mov	dpl,a
+      0002CB 22               [24] 1266 	ret
+                                   1267 ;------------------------------------------------------------
+                                   1268 ;Allocation info for local variables in function 'ds_int2bcd_tens'
+                                   1269 ;------------------------------------------------------------
+                                   1270 ;integer                   Allocated to registers r7 
+                                   1271 ;------------------------------------------------------------
+                                   1272 ;	src/ds1302.c:289: uint8_t ds_int2bcd_tens(uint8_t integer) {
+                                   1273 ;	-----------------------------------------
+                                   1274 ;	 function ds_int2bcd_tens
+                                   1275 ;	-----------------------------------------
+      0002CC                       1276 _ds_int2bcd_tens:
+      0002CC AF 82            [24] 1277 	mov	r7,dpl
+                                   1278 ;	src/ds1302.c:290: return integer / 10 % 10;
+      0002CE 75 F0 0A         [24] 1279 	mov	b,#0x0A
+      0002D1 EF               [12] 1280 	mov	a,r7
+      0002D2 84               [48] 1281 	div	ab
+      0002D3 75 F0 0A         [24] 1282 	mov	b,#0x0A
+      0002D6 84               [48] 1283 	div	ab
+      0002D7 85 F0 82         [24] 1284 	mov	dpl,b
+      0002DA 22               [24] 1285 	ret
+                                   1286 ;------------------------------------------------------------
+                                   1287 ;Allocation info for local variables in function 'ds_int2bcd_ones'
+                                   1288 ;------------------------------------------------------------
+                                   1289 ;integer                   Allocated to registers r7 
+                                   1290 ;------------------------------------------------------------
+                                   1291 ;	src/ds1302.c:293: uint8_t ds_int2bcd_ones(uint8_t integer) {
+                                   1292 ;	-----------------------------------------
+                                   1293 ;	 function ds_int2bcd_ones
+                                   1294 ;	-----------------------------------------
+      0002DB                       1295 _ds_int2bcd_ones:
+      0002DB AF 82            [24] 1296 	mov	r7,dpl
+                                   1297 ;	src/ds1302.c:294: return integer % 10;
+      0002DD 75 F0 0A         [24] 1298 	mov	b,#0x0A
+      0002E0 EF               [12] 1299 	mov	a,r7
+      0002E1 84               [48] 1300 	div	ab
+      0002E2 85 F0 82         [24] 1301 	mov	dpl,b
+      0002E5 22               [24] 1302 	ret
+                                   1303 	.area CSEG    (CODE)
+                                   1304 	.area CONST   (CODE)
+                                   1305 	.area XINIT   (CODE)
+                                   1306 	.area CABS    (ABS,CODE)
