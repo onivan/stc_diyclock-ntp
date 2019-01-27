@@ -38,19 +38,21 @@ Basic functionality is working:
 * solder 3 wires from clock board to ESP8266 module:
 
 **ESP8266 connections:**
-Line	Clock	ESP8266
-5V	R13	5V
-GND	R17	GND
-TX-RX	P3.6	D4
+| Line	| Clock	| ESP8266 |
+|-------|-------|---------| 
+| 5V	| R13	| 5V	  |
+| GND	| R17	| GND	  |
+| TX-RX	| P3.6	| D4	  |
 
 
 * solder 3 wires from AM2302 to ESP8266 module:
 
 **AM2302 connections:**
-Line	ESP8266
-5V	5V
-GND	GND
-Data	D3
+| Line	| ESP8266 |
+|-------|---------| 
+| 5V	| 5V      | 
+| GND	| GND     | 
+| Data	| D3      | 
 
 
 Please ignore an extra 1117-3.3 on my photos: I messed up with 3.3V line on my module and had to solder 1117-3.3 to fix it.
