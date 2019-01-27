@@ -1,6 +1,9 @@
-# STC DIY Clock Kit firmware + NTP Time sync on ESP8622
+# STC DIY Clock Kit firmware + NTP Time sync on ESP8266
+
+**No major hardware changes required: just 3 wires from the clock to ESP8266 and (optional) 3 wires to AM2302 humidity sensor.**
 
 *The following readme text is to be updated to reflect the changes.*
+
 
 Firmware replacement for STC15F mcu-based DIY Clock Kit (available from banggood [see below for link], aliexpress, et al.) Uses [sdcc](http://sdcc.sf.net) to build and [stcgal](https://github.com/grigorig/stcgal) to flash firmware on to STC15W404AS and STC15W408AS series microcontroller.
 
@@ -14,12 +17,24 @@ Based on https://github.com/zerog2k/stc_diyclock
 ## features
 Basic functionality is working:
 * time display **24 hour mode only**
+* display auto-dim
+* relative humidity (%) and temperature (C) display acquired with AM2302
+
+## I removed the following unnecessary for me and because I hit the limit of the SRAM (optimizations are welcomed)
 * **no** date display/set
 * **no** day of week
 * **no** seconds display/reset
-* display auto-dim
-* relative humidity (%) and temperature (C) display aquired with AM2302
 * **no** alarm
+
+
+## Building steps:
+
+* check what is yours STC MC model. The firmware requires MC with >4 kB of flash and hardware UART. Get one (or a dozen) if needed on aliexpress.
+* solder on the board the pin headers for UART. On my board it marked as P3. We need only RX line (P3.6 of a MC). 
+
+
+* get and upload to ESP8266
+https://nodemcu-build.com/index.php
 
 
 **note this project in development and a work-in-progress**
