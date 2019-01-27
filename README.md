@@ -59,6 +59,8 @@ I've removed the following functions unnecessary for me and because I've hit the
 
 Please ignore an extra 1117-3.3 on my photos: I messed up with 3.3V line on my module and had to solder 1117-3.3 to fix it.
 
+Check out more photos in a folder photos.
+
 * get and upload to ESP8266
 https://nodemcu-build.com/index.php
 Add these modules to the build: dht, mdns, rtcfifo, rtcmem, rtctime, sntp.
