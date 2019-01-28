@@ -21,7 +21,7 @@ Basic functionality is working:
 * time syncronization from NTP server (updated and saved to RTC DS1302 every 5 seconds)
 * the first dot on display starts fast blinking after 30 seconds since last successfull time update on the clock (NTP error or no WiFi connection)
 
-I've removed the following functions unnecessary for me and because I've hit the limit of the SRAM (optimizations are needed)
+I've removed the following functions unnecessary for me and because I've hit the limit of the RAM (optimizations are needed)
 * **no** date display/set
 * **no** day of week
 * **no** seconds display/reset
