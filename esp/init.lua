@@ -3,7 +3,7 @@ pinDHT = 3
 -- gpio.write(2, gpio.HIGH)
 
 local status,temp,humi,temp_decimal,humi_decimal
-
+ 
 -- configure for 9600, 8N1, with echo
 uart.setup(1, 57600, 8, uart.PARITY_NONE, uart.STOPBITS_1, 1)
 
