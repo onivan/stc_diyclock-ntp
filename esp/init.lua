@@ -18,7 +18,7 @@ rtcGood = 0
 
 function UpdateRtc()
     tm = rtctime.epoch2cal(rtctime.get())
-    timestring = string.format("%04d-%02d-%02d %02d:%02d:%02d", tm["year"], tm["mon"], tm["day"], tm["hour"], tm["min"], tm["sec"])
+    timestring = string.format("%04d-%02d-%02d %02d:%02d:%02d", tm["year"], tm["mon"], tm["day"], tm["hour"]+UTCTZ, tm["min"], tm["sec"])
     uarttimestring = string.format("H%02dM%02dS%02d*\0\0", tm["hour"]+UTCTZ, tm["min"], tm["sec"])
     print(uarttimestring)
     
@@ -60,12 +60,12 @@ wifi.setmode(wifi.STATION)
 
 --connect to Access Point (DO save config to flash)
 station_cfg={}
-station_cfg.ssid="asushotyn"
+station_cfg.ssid="🐱"
 station_cfg.pwd="hotyn777"
 station_cfg.auto=true
 station_cfg.save=true
 wifi.sta.config(station_cfg)
-wifi.sta.setip({ip="192.168.1.101",netmask="255.255.255.0",gateway="192.168.1.1"})
+wifi.sta.setip({ip="192.168.1.102",netmask="255.255.255.0",gateway="192.168.1.1"})
 print("ESP8266 mode is: " .. wifi.getmode())
 print(wifi.sta.getip())
  
@@ -97,7 +97,6 @@ end
 
 function receiver(sck, request)
 
-    printrtc() 
      -- print(request)
         local _, _, method, path, vars = string.find(request, "([A-Z]+) (.+)?(.+) HTTP");
 
