@@ -8,9 +8,9 @@ Based on https://github.com/zerog2k/stc_diyclock
 
 Firmware replacement for STC15 mcu-based DIY Clock Kit (available from banggood [see below for link], aliexpress, et al.) Uses [sdcc](http://sdcc.sf.net) to build and [stcgal](https://github.com/grigorig/stcgal) to flash firmware on to STC15W404AS and STC15W408AS series microcontroller.
 
-![Image of Banggood SKU972289](http://img.banggood.com/thumb/large/2014/xiemeijuan/03/SKU203096/A3.jpg?p=WX0407753399201409DA)
+![Image from ali](https://ae01.alicdn.com/kf/HTB1HrzWsVuWBuNjSspnq6x1NVXa1/CNIKESIN-Diy-digital-clock-voice-timekeeping-clock-kits-LED-DIY-SCM-training-diy-electronic-clock-watch.jpg_640x640.jpg)
 
-[link to Banggood product page for SKU 972289](http://www.banggood.com/DIY-4-Digit-LED-Electronic-Clock-Kit-Temperature-Light-Control-Version-p-972289.html?p=WX0407753399201409DA)
+[I've bought my clock here](https://www.aliexpress.com/item/DIY-kit-Digital-clock-production-suite-voice-timekeeping-clock-parts-LED-DIY-SCM-training-electronic-watch/32695380340.html?spm=a2g0s.9042311.0.0.27424c4dyFKwzs)
 
 
 ## features
@@ -30,9 +30,9 @@ I've removed the following functions unnecessary for me and because I've hit the
 
 ## Building steps:
 
-* check what is yours STC MC model. The firmware requires MC with >4 kB of flash and hardware UART. Get one (or a dozen) if needed on aliexpress.
+* check what is yours STC MC model. Should be STC15W404AS or STC15W408AS. The firmware requires MC with >=4 kB of flash and hardware UART. Get one (or a dozen) if needed on aliexpress ![I took them here](https://www.aliexpress.com/item/5pcs-lot-STC15W404AS-35I-SKDIP28-STC15W404AS-Best-quality/32821143763.html?spm=a2g0s.9042311.0.0.27424c4dNiVJP8).
 
-* get ESP8266 WEMOS D1 mini wemos.cc (or clone)
+* get ESP8266 WEMOS D1 mini wemos.cc (or clone) ![here](https://www.aliexpress.com/item/D1-mini-Mini-NodeMcu-4M-bytes-Lua-WIFI-Internet-of-Things-development-board-based-ESP8266-by/32635160765.html?spm=a2g0s.9042311.0.0.27424c4d4OWC37)
 * get AM2302 humidity sensor (optional)
 
 * solder on the board the pin headers for UART. On my board it marked as P3. We need only RX line (P3.6 of a MC). 
@@ -85,7 +85,9 @@ Add these modules to the build: dht, mdns, rtcfifo, rtcmem, rtctime, sntp.
 
 ## hardware
 
-* DIY LED Clock kit, based on STC15F204EA and DS1302, e.g. [Banggood SKU 972289](http://www.banggood.com/DIY-4-Digit-LED-Electronic-Clock-Kit-Temperature-Light-Control-Version-p-972289.html?p=WX0407753399201409DA)
+
+* DIY LED Clock kit, based on STC15W404AS or STC15W408AS and DS1302, e.g. [I've bought my clock here](https://www.aliexpress.com/item/DIY-kit-Digital-clock-production-suite-voice-timekeeping-clock-parts-LED-DIY-SCM-training-electronic-watch/32695380340.html?spm=a2g0s.9042311.0.0.27424c4dyFKwzs)
+
 * connected to PC via cheap USB-UART adapter, e.g. CP2102, CH340G. [Banggood: CP2102 USB-UART adapter](http://www.banggood.com/CJMCU-CP2102-USB-To-TTLSerial-Module-UART-STC-Downloader-p-970993.html?p=WX0407753399201409DA)
 
 ## connection
@@ -125,10 +127,6 @@ To generate eeprom.hex, run:
 make eeprom
 ```
 ~~
-
-## clock assumptions
-For STC15F204EA, some of the code assumes 11.0592 MHz internal RC system clock (set by stc-isp or stcgal).
-For example, delay routines might need to be adjusted if this is different. (Most timing has been moved to hardware timers.)
 
 ## disclaimers
 This code is provided as-is, with NO guarantees or liabilities.
