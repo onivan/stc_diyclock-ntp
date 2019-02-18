@@ -71,7 +71,6 @@ Add these modules to the build: dht, mdns, rtcfifo, rtcmem, rtctime, sntp.
 * Using ESPlorer upload init.lua from the **esp** folder to your ESP8266.
 
 ## Known bugs
-* wierd time display after midnight: 24 instead of 00
 * sometimes some random symbols start to display. A powercycle helps.
 * non-responsive button operation
 
