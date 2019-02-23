@@ -158,5 +158,5 @@ Kit instructions w/ schematic: [scan](docs/DIY_LED_Clock.png) | [PDF](http://img
 
 
 ### chat
-[![Join the chat at https://gitter.im/zerog2k/stc_diyclock](https://badges.gitter.im/zerog2k/stc_diyclock.svg)](https://gitter.im/zerog2k/stc_diyclock?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at gitter.im](https://gitter.im/stc_diyclock-ntp/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
