@@ -20,6 +20,8 @@ Basic functionality is working:
 * relative humidity (%) and temperature (C) display acquired with AM2302 (last 5 seconds every minute or by pressing the Upper button)
 * time syncronization from NTP server (updated and saved to RTC DS1302 every 5 seconds)
 * the first dot on display starts fast blinking after 30 seconds since last successfull time update on the clock (NTP error or no WiFi connection)
+* webserver with http page showing the time, humidity and temperature:
+![webpage](https://github.com/onivan/stc_diyclock-ntp/blob/master/photos/webpage.jpg)
 
 I've removed the following functions unnecessary for me and because I've hit the limit of the RAM (optimizations are needed)
 * **no** date display/set
@@ -158,5 +160,5 @@ Kit instructions w/ schematic: [scan](docs/DIY_LED_Clock.png) | [PDF](http://img
 
 
 ### chat
-[![Join the chat at https://gitter.im/zerog2k/stc_diyclock](https://badges.gitter.im/zerog2k/stc_diyclock.svg)](https://gitter.im/zerog2k/stc_diyclock?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Join the chat at https://gitter.im/stc_diyclock-ntp/community](https://badges.gitter.im/stc_diyclock-ntp/community.svg)](https://gitter.im/stc_diyclock-ntp/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[Join the chat at gitter.im](https://gitter.im/stc_diyclock-ntp/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
