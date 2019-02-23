@@ -20,6 +20,8 @@ Basic functionality is working:
 * relative humidity (%) and temperature (C) display acquired with AM2302 (last 5 seconds every minute or by pressing the Upper button)
 * time syncronization from NTP server (updated and saved to RTC DS1302 every 5 seconds)
 * the first dot on display starts fast blinking after 30 seconds since last successfull time update on the clock (NTP error or no WiFi connection)
+* webserver with http page showing the time, humidity and temperature:
+![webpage](https://github.com/onivan/stc_diyclock-ntp/blob/master/photos/webpage.jpg)
 
 I've removed the following functions unnecessary for me and because I've hit the limit of the RAM (optimizations are needed)
 * **no** date display/set
