@@ -23,7 +23,7 @@ function UpdateRtc()
       tm["hour"] = tm["hour"] - 24
     end
  
-    timestring = string.format("%04d-%02d-%02d %02d:%02d:%02d", tm["year"], tm["mon"], tm["day"], tm["hour"]+UTCTZ, tm["min"], tm["sec"])
+    timestring = string.format("%04d-%02d-%02d %02d:%02d:%02d", tm["year"], tm["mon"], tm["day"], tm["hour"], tm["min"], tm["sec"])
     uarttimestring = string.format("H%02dM%02dS%02d*\0\0", tm["hour"]+UTCTZ, tm["min"], tm["sec"])
     print(uarttimestring)
     
