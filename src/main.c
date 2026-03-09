@@ -209,7 +209,7 @@ enum Event {
 
 volatile enum Event event;
 
-void timer0_isr() __interrupt 1 __using 1
+void timer0_isr() __interrupt(1) __using(1)
 {
     uint8_t tmp;
     enum Event ev = EV_NONE;
@@ -637,7 +637,7 @@ int main()
                 
         }
         
-        if ( (kmode == K_TEMP_DISP) || (ss>=85) && (ss<=89) ) {
+        if ( (kmode == K_TEMP_DISP) || (ss>=85) && (ss<=89) && (tt != 0 || ww != 0) ) {
 			dmode = M_TEMP_DISP;
 		} else {
 			dmode = M_NORMAL;
@@ -766,7 +766,7 @@ uint8_t charToint (char h, char l){
 UART
 -----------------------------*/
 
-void UART1_Routine(void) __interrupt 4 __using 1
+void UART1_Routine(void) __interrupt(4) __using(1)
 {
 	
 	
